@@ -1,0 +1,11 @@
+.container--list h1 {
+  text-align: center;
+  margin: 100px;
+  font-size: 50px;
+}
+
+.container--movies {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+}
