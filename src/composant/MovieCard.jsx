@@ -5,20 +5,22 @@ import "../css/MovieCard.css";
 
 function MovieCard(props) {
   return (
-    <Link className='container--link'>
+    <div className='container--link'>
       <div className='movieCard'>
-        <img
-          className='movieCard--poster'
-          src={props.movie.poster}
-          alt='poster'
-        />
+        <Link to={{ pathname: `/movie` }}>
+          <img
+            className='movieCard--poster'
+            src={props.movie.poster}
+            alt='poster'
+          />
+        </Link>
         <div className='movieCard--info'>
           <span>Titre : {props.movie.title}</span>
           <span>Réalisateur : {props.movie.real}</span>
           <span>Année : {props.movie.year}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
