@@ -1,6 +1,6 @@
 .container--director {
   width: 100%;
-  height: calc(100vh - 153px);
+  min-height: calc(100vh - 153px);
   margin-top: 50px;
   display: flex;
   flex-direction: row;

@@ -1,36 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { Loading } from "../composant";
+
+import { getMovieWithId } from "../action/moviesAction";
 
 import "../css/Movie.css";
 import play from "../assets/pictures/play.png";
 
-function Movie() {
+function MovieComponent(props) {
+  const movieId = props.match.params.id;
+
+  const propsGetMovieWithId = props.getMovieWithId;
+
+  useEffect(() => {
+    propsGetMovieWithId(movieId);
+  }, [propsGetMovieWithId, movieId]);
+
+  const movie = props.movie && props.movie[0];
+
   return (
-    <div className='container--movie'>
-      <div className='posterMovie'>
-        <img
-          src='https://fr.web.img3.acsta.net/medias/nmedia/18/35/14/33/18366630.jpg'
-          alt='poster'
-          className='posterMovie--img'
-        />
-      </div>
-      <div className='container--movieInfo'>
-        <div className='movieInfo'>
-          <span>Titre du film</span>
-          <span>Réalisateur</span>
-          <span>Sortie en </span>
-          <span>Nationnalité</span>
-          <span>Acteurs principaux :</span>
-          <span>synopsis :</span>
-          <p></p>
+    <div>
+      {props.movie && props.movie ? (
+        <div className='container--movie'>
+          <div className='posterMovie'>
+            <img src={movie.poster} alt='poster' className='posterMovie--img' />
+          </div>
+          <div className='container--movieInfo'>
+            <div className='movieInfo'>
+              <span>{movie.title}</span>
+              <span>Réalisateur</span>
+              <span>Sortie en : {movie.year} </span>
+              <span>Genre : {movie.kind}</span>
+              <span>Acteurs principaux :</span>
+              <span>synopsis :</span>
+              <p>{movie.synopsis}</p>
+            </div>
+            <Link
+              to={{ pathname: `/player` }}
+              className='container--buttonWatch'>
+              <div className='buttonWatch'>REGARDER</div>
+              <img src={play} alt='play' className='play' />
+            </Link>
+          </div>
         </div>
-        <Link to={{ pathname: `/` }} className='container--buttonWatch'>
-          <div className='buttonWatch'>REGARDER</div>
-          <img src={play} alt='play' className='play' />
-        </Link>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  movie: state.movieReducer.movie,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getMovieWithId: (movieId) => dispatch(getMovieWithId(movieId)),
+});
+
+const Movie = connect(mapStateToProps, mapDispatchToProps)(MovieComponent);
 
 export { Movie };

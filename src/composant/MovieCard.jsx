@@ -7,7 +7,7 @@ function MovieCard(props) {
   return (
     <div className='container--link'>
       <div className='movieCard'>
-        <Link to={{ pathname: `/movie` }}>
+        <Link to={{ pathname: `/movie/${props.movie.id_movie}` }}>
           <img
             className='movieCard--poster'
             src={props.movie.poster}
