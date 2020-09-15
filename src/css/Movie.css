@@ -1,6 +1,6 @@
 .container--movie {
   width: 100%;
-  height: calc(100vh - 153px);
+  min-height: calc(100vh - 158px);
   margin-top: 50px;
   display: flex;
   flex-direction: row;
@@ -14,19 +14,22 @@
 
 .posterMovie--img {
   width: 500px;
-  height: auto;
+  height: 43rem;
 }
 
 .container--movieInfo {
   width: 50%;
+  height: 42rem;
+  border: 1px solid white;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  align-content: space-around;
+  justify-content: space-around;
 }
 
 .movieInfo {
   width: 100%;
-  height: 500px;
+  height: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,11 +38,27 @@
 
 .movieInfo span {
   width: 100%;
-  font-size: 25px;
+  font-size: 2rem;
+}
+
+.director--name {
+  text-decoration: none;
+  color: black;
+}
+
+.infoClic {
+  color: white;
+  font-size: 15px;
+  margin-left: 14rem;
+  display: inline;
 }
 
 .movieInfo span:nth-child(2n + 1) {
   color: white;
+}
+
+.synopsis {
+  font-size: 2rem;
 }
 
 .container--buttonWatch {
@@ -61,6 +80,6 @@
   background-color: #641212;
 }
 .play {
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
 }

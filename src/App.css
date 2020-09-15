@@ -1,3 +1,9 @@
 .App {
   background-color: #3c576a;
+  font-family: Balsa;
+}
+
+@font-face {
+  font-family: "Balsa";
+  src: url("./assets/BalsamiqSans-Regular.ttf");
 }

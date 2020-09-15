@@ -1,6 +1,6 @@
 .container--director {
   width: 100%;
-  min-height: calc(100vh - 153px);
+  min-height: calc(100vh - 158px);
   margin-top: 50px;
   display: flex;
   flex-direction: row;
@@ -14,11 +14,15 @@
 
 .imgDirector--img {
   width: 500px;
-  height: auto;
+  height: 43rem;
 }
 
 .container--directorInfo {
   width: 50%;
+  height: 42rem;
+  padding: 10px;
+  border: 1px solid white;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   align-content: space-around;
@@ -26,7 +30,7 @@
 
 .directorInfo {
   width: 100%;
-  height: 500px;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,9 +39,30 @@
 
 .directorInfo span {
   width: 100%;
-  font-size: 25px;
+  font-size: 2rem;
 }
 
 .directorInfo span:nth-child(2n + 1) {
   color: white;
+}
+
+.director--moviesList {
+  width: 100%;
+  font-size: 2rem;
+  margin-top: 5px;
+  position: relative;
+  display: flex;
+  flex-flow: wrap row;
+}
+
+.movie--title {
+  width: 50%;
+  margin-top: 20px;
+  color: black;
+  position: relative;
+  text-decoration: none;
+}
+
+.movie--title:hover {
+  text-decoration: underline;
 }

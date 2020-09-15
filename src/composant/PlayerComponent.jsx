@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPlayer from "react-player";
 
-import bunny from "";
+// import bunny from "../assets/BigBuckBunny.mp4";
 
 function PlayerComponent() {
   const style = {
@@ -17,7 +17,7 @@ function PlayerComponent() {
   return (
     <div style={style}>
       <ReactPlayer
-        url={bunny}
+        url='https://www.dropbox.com/s/oco66cg382nhhg8/Cuba.mp4?dl=0'
         controls
         playing={false}
         width='100%'

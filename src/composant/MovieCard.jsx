@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { noPoster } from "../utils/Function";
+
 import "../css/MovieCard.css";
 
 function MovieCard(props) {
@@ -10,13 +12,13 @@ function MovieCard(props) {
         <Link to={{ pathname: `/movie/${props.movie.id_movie}` }}>
           <img
             className='movieCard--poster'
-            src={props.movie.poster}
+            src={noPoster(props.movie.poster)}
             alt='poster'
           />
         </Link>
         <div className='movieCard--info'>
           <span>Titre : {props.movie.title}</span>
-          <span>Réalisateur : {props.movie.real}</span>
+          <span>Réalisateur : {props.movie.name}</span>
           <span>Année : {props.movie.year}</span>
         </div>
       </div>

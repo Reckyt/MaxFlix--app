@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { Loading } from "../composant";
 
 import { getMovieWithId } from "../action/moviesAction";
+import { noPoster } from "../utils/Function";
 
 import "../css/Movie.css";
-import play from "../assets/pictures/play.png";
+import play from "../assets/pictures/play.svg";
 
 function MovieComponent(props) {
   const movieId = props.match.params.id;
@@ -19,23 +20,34 @@ function MovieComponent(props) {
   }, [propsGetMovieWithId, movieId]);
 
   const movie = props.movie && props.movie[0];
-
+  console.log(movie);
   return (
     <div>
       {props.movie && props.movie ? (
         <div className='container--movie'>
           <div className='posterMovie'>
-            <img src={movie.poster} alt='poster' className='posterMovie--img' />
+            <img
+              src={noPoster(movie.poster)}
+              alt='poster'
+              className='posterMovie--img'
+            />
           </div>
           <div className='container--movieInfo'>
             <div className='movieInfo'>
               <span>{movie.title}</span>
-              <span>Réalisateur</span>
+              <span>
+                Réalisateur : {movie.firstname} {movie.name}
+                <Link
+                  className='director--name'
+                  to={{ pathname: `/director/${movie.id_director}` }}>
+                  <p className='infoClic'>Voir la fiche du réalisateur</p>
+                </Link>
+              </span>
               <span>Sortie en : {movie.year} </span>
               <span>Genre : {movie.kind}</span>
               <span>Acteurs principaux :</span>
               <span>synopsis :</span>
-              <p>{movie.synopsis}</p>
+              <p className='synopsis'>{movie.synopsis}</p>
             </div>
             <Link
               to={{ pathname: `/player` }}

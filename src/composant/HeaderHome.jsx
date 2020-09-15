@@ -21,7 +21,7 @@ function HeaderHome() {
           </a>
         </div>
         <div className='headerHome--searchBar'>
-          <input></input>
+          <input placeholder='Rechercher ici'></input>
         </div>
       </div>
       <div className='lign'> </div>

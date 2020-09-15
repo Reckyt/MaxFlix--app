@@ -8,7 +8,7 @@ function DirectorsList(props) {
       <div className='container--movies'>
         {props.directors &&
           props.directors.map((director, i) => {
-            return <DirectorCard director={director} />;
+            return <DirectorCard key={i} director={director} />;
           })}
       </div>
     </div>

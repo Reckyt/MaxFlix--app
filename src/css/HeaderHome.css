@@ -1,4 +1,5 @@
 .container--header {
+  height: 105px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +7,7 @@
 
 .headerHome {
   width: 100%;
-  height: 100px;
+  height: 100%;
   background-color: #3c576a;
   display: flex;
   flex-direction: row;
@@ -60,6 +61,7 @@
   background-color: #2b3c48;
   color: white;
   font-size: 20px;
+  border: none;
 }
 
 .lign {

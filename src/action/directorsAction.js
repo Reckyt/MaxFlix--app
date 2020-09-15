@@ -9,9 +9,6 @@ export const getDirectors = () => (dispatch) => {
   Axios.get(url)
     .then((res) => res.data)
     .then((data) => {
-      data.sort(function (a, b) {
-        return a - b;
-      });
       dispatch({
         type: GET_DIRECTORS,
         payload: data,
