@@ -45,8 +45,9 @@ function DirectorComponent(props) {
           </div>
           <div className='container--directorInfo'>
             <div className='directorInfo'>
-              <span>{director.name}</span>
-              <span>{director.firstname}</span>
+              <span>
+                {director.firstname} {director.name}
+              </span>
               <span>Age : </span>
               <span>Nationnalité : {director.nationality} </span>
               <span>Liste des films réalisés :</span>

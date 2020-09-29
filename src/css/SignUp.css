@@ -1,0 +1,54 @@
+.form--inscription {
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form--inscription h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin: 50px;
+}
+
+.form--input {
+  height: 7rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form--label {
+  width: 100%;
+  text-align: left;
+}
+
+.form--input input {
+  height: 2rem;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  margin-top: 5px;
+  background-color: #2b3c48;
+}
+
+.link--connection {
+  text-decoration: none;
+  color: blue;
+  margin-bottom: 20px;
+}
+
+.btn--signup {
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}

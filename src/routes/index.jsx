@@ -4,3 +4,6 @@ export * from "./MoviesList";
 export * from "./Director";
 export * from "./DirectorsList";
 export * from "./Player";
+export * from "./SignUp";
+export * from "./SignIn";
+export * from "./Account";

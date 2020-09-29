@@ -1,4 +1,4 @@
-import { GET_DIRECTORS, GET_DIRECTORS_WITH_ID } from "./index";
+import { GET_DIRECTORS, GET_DIRECTORS_WITH_ID, SEARCH_DIRECTOR } from "./index";
 
 import Axios from "axios";
 
@@ -34,4 +34,13 @@ export const getDirectorWithId = (directorId) => (dispatch) => {
     .catch(function (error) {
       console.log("Request failed", error);
     });
+};
+
+// ---------------------------------- SEARCH_MOVIE -------------------------------------------------------
+
+export const searchDirector = (filteredDirectors) => (dispatch) => {
+  dispatch({
+    type: SEARCH_DIRECTOR,
+    payload: filteredDirectors,
+  });
 };

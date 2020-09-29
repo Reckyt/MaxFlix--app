@@ -30,7 +30,7 @@
 
 .directorInfo {
   width: 100%;
-  height: 50%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,7 +42,7 @@
   font-size: 2rem;
 }
 
-.directorInfo span:nth-child(2n + 1) {
+.directorInfo span {
   color: white;
 }
 
@@ -58,7 +58,8 @@
 .movie--title {
   width: 50%;
   margin-top: 20px;
-  color: black;
+  color: #959595;
+  font-size: 1.5rem;
   position: relative;
   text-decoration: none;
 }

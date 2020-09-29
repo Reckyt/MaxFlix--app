@@ -1,11 +1,22 @@
+.container--list {
+  position: relative;
+}
+
 .container--list h1 {
   text-align: center;
   margin: 50px;
   font-size: 50px;
+  color: white;
+}
+
+.aside--burger {
+  position: relative;
+  top: -100px;
 }
 
 .container--movies {
   width: 100%;
+  background-color: #1a262e;
   display: flex;
   flex-flow: wrap;
 }

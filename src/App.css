@@ -1,9 +1,10 @@
 .App {
-  background-color: #3c576a;
-  font-family: Balsa;
+  background-color: #1a262e;
+  font-family: calibri;
+  height: 100vh;
 }
 
 @font-face {
-  font-family: "Balsa";
-  src: url("./assets/BalsamiqSans-Regular.ttf");
+  font-family: "calibri";
+  src: url("./assets/Calibri\ Regular.ttf");
 }

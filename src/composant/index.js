@@ -3,3 +3,7 @@ export * from "./MovieCard";
 export * from "./DirectorCard";
 export * from "./PlayerComponent";
 export * from "./Loading";
+export * from "./NoResult";
+export * from "./Burger";
+export * from "./Menu";
+export * from "./IconButton";

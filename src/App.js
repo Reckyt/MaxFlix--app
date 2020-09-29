@@ -9,6 +9,9 @@ import {
   Director,
   DirectorsList,
   Player,
+  SignUp,
+  Account,
+  SignIn,
 } from "./routes";
 import { HeaderHome } from "./composant";
 import { getMovies } from "./action/moviesAction";
@@ -36,12 +39,22 @@ function App(props) {
           <Route path='/Player' component={Player} />
           <Route
             path='/moviesList'
-            render={() => <MoviesList movies={props.movies} />}
+            render={() => (
+              <MoviesList movies={props.movies} research={props.research} />
+            )}
           />
           <Route
             path='/directorsList'
-            render={() => <DirectorsList directors={props.directors} />}
+            render={() => (
+              <DirectorsList
+                directors={props.directors}
+                research={props.research}
+              />
+            )}
           />
+          <Route path='/signUp' component={SignUp} />
+          <Route path='/signIn' component={SignIn} />
+          <Route path='/account' component={Account} />
         </Switch>
       </div>
     </BrowserRouter>
@@ -51,6 +64,7 @@ function App(props) {
 const mapStateToProps = (state) => ({
   movies: state.movieReducer.movies,
   directors: state.directorReducer.directors,
+  research: state.movieReducer.research,
 });
 
 const mapDispatchToProps = (dispatch) => ({
