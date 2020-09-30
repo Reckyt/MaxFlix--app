@@ -33,7 +33,7 @@ function App(props) {
       <div className='App'>
         <HeaderHome />
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' render={() => <Home movies={props.movies} />} />
           <Route path='/movie/:id' component={Movie} />
           <Route path='/director/:id' component={Director} />
           <Route path='/Player' component={Player} />
@@ -54,7 +54,7 @@ function App(props) {
           />
           <Route path='/signUp' component={SignUp} />
           <Route path='/signIn' component={SignIn} />
-          <Route path='/account' component={Account} />
+          <Route path='/account/:id' component={Account} />
         </Switch>
       </div>
     </BrowserRouter>

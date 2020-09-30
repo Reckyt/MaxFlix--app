@@ -66,7 +66,7 @@ function MovieComponent(props) {
       );
     }
   };
-  console.log(moviesSeen);
+
   const renderButtonSeen = (movie) => {
     if (moviesSeen && moviesSeen.length > 0) {
       return moviesSeen.map((aMovie) => {

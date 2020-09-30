@@ -20,6 +20,9 @@ function HeaderHomeComponent(props) {
     props.searchDirector(search);
   };
 
+  const userId =
+    props.userInfo && props.userInfo && props.userInfo.userData[0].id;
+
   return (
     <div className='container--header'>
       <div className='headerHome'>
@@ -57,9 +60,15 @@ function HeaderHomeComponent(props) {
             value={search}
             onChange={handleSearch}
           />
-          <Link to={{ pathname: "/Signin" }}>
-            <img className='avatar' src={avatar} alt='avatar' />
-          </Link>
+          <div
+            className={
+              props.caseId === 4 ? "selected--avatar" : "container--avatar"
+            }
+            onClick={() => props.changePage(4)}>
+            <Link to={{ pathname: `/account/${userId}` }}>
+              <img className='avatar' src={avatar} alt='avatar' />
+            </Link>
+          </div>
         </div>
       </div>
       <div className='lign'> </div>
@@ -68,6 +77,7 @@ function HeaderHomeComponent(props) {
 }
 
 const mapStateToProps = (state) => ({
+  userInfo: state.userReducer.userInfo,
   caseId: state.caseReducer.caseId,
   moviesList: state.movieReducer.movies,
   directorsList: state.directorReducer.directors,
