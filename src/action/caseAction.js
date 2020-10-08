@@ -1,8 +1,8 @@
 import { CHANGE_HEADER } from "./index";
 
-export const changePage = (aBoolean) => (dispatch) => {
+export const changePage = (aInt) => (dispatch) => {
   dispatch({
     type: CHANGE_HEADER,
-    payload: aBoolean,
+    payload: aInt,
   });
 };

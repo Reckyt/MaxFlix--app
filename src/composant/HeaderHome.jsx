@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { changePage } from "../action/caseAction";
+import {} from "../action/caseAction";
 import { searchMovie } from "../action/moviesAction";
 import { searchDirector } from "../action/directorsAction";
+import { changePage, showAsideMenu } from "../action/routingAction";
 
 import avatar from "../assets/pictures/compte.png";
 import wheel from "../assets/pictures/gear.svg";
@@ -14,6 +15,9 @@ import "../css/HeaderHome.css";
 function HeaderHomeComponent(props) {
   const [search, setSearch] = useState("");
 
+  const userId =
+    props.userInfo && props.userInfo && props.userInfo.userData[0].id;
+
   const handleSearch = (event) => {
     event.preventDefault();
     setSearch(event.target.value);
@@ -21,36 +25,38 @@ function HeaderHomeComponent(props) {
     props.searchDirector(search);
   };
 
-  const userId =
-    props.userInfo && props.userInfo && props.userInfo.userData[0].id;
+  const handleMenu = (pageNumber, aBoolean) => {
+    props.changePage(pageNumber);
+    props.showAsideMenu(aBoolean);
+  };
 
   return (
     <div className='container--header'>
       <div className='headerHome'>
         <div className='headerHome--nav'>
           <Link to='/'>
-            <div className='websiteName' onClick={() => props.changePage(0)}>
+            <div className='websiteName' onClick={() => handleMenu(0, false)}>
               MaxFlix
             </div>
           </Link>
           <Link to='/moviesList'>
             <div
               className={props.caseId === 1 ? "selected" : null}
-              onClick={() => props.changePage(1)}>
+              onClick={() => handleMenu(1, false)}>
               Films
             </div>
           </Link>
           <Link to='/directorsList'>
             <div
               className={props.caseId === 2 ? "selected" : null}
-              onClick={() => props.changePage(2)}>
+              onClick={() => handleMenu(2, false)}>
               Réalisateurs
             </div>
           </Link>
           {/*<Link to='/series'>
             <div
               className={props.caseId === 3 ? "selected" : null}
-              onClick={() => props.changePage(3)}>
+              onClick={() => handleMenu(3, false)}>
               Séries
             </div>
   </Link>*/}
@@ -65,7 +71,7 @@ function HeaderHomeComponent(props) {
             className={
               props.caseId === 4 ? "selected--avatar" : "container--avatar"
             }
-            onClick={() => props.changePage(4)}>
+            onClick={() => handleMenu(4, true)}>
             <Link to={{ pathname: `/admin/dashboard` }}>
               <img className='wheel' src={wheel} alt='wheel' />
             </Link>
@@ -74,7 +80,7 @@ function HeaderHomeComponent(props) {
             className={
               props.caseId === 5 ? "selected--avatar" : "container--avatar"
             }
-            onClick={() => props.changePage(5)}>
+            onClick={() => handleMenu(5, false)}>
             <Link to={{ pathname: `/account/${userId}` }}>
               <img className='avatar' src={avatar} alt='avatar' />
             </Link>
@@ -88,7 +94,7 @@ function HeaderHomeComponent(props) {
 
 const mapStateToProps = (state) => ({
   userInfo: state.userReducer.userInfo,
-  caseId: state.caseReducer.caseId,
+  caseId: state.routingReducer.caseId,
   moviesList: state.movieReducer.movies,
   directorsList: state.directorReducer.directors,
 });
@@ -98,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
   searchMovie: (filteredMovies) => dispatch(searchMovie(filteredMovies)),
   searchDirector: (filteredDirectors) =>
     dispatch(searchDirector(filteredDirectors)),
+  showAsideMenu: (aBoolean) => dispatch(showAsideMenu(aBoolean)),
 });
 
 const HeaderHome = connect(

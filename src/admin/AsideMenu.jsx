@@ -1,27 +1,62 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { changePage } from "../action/routingAction";
 
 import "../css/AsideMenu.css";
 
-function AsideMenu() {
+function AsideMenuComponent(props) {
   return (
-    <div className='aside--menu'>
-      <Link className='button--menu' to={{ pathname: `/admin/new-movie` }}>
-        <div>Ajouter un film </div>
-      </Link>
-      <Link className='button--menu' to={{ pathname: `/admin/new-director` }}>
-        <div>Ajouter un réalisateur</div>
-      </Link>
-      <Link className='button--menu' to={{ pathname: `/admin/movies-items` }}>
-        <div>Afficher tous les films</div>
+    <div className={props.showAsideMenu ? "aside--menu" : "hide--aside--menu"}>
+      <Link
+        className={
+          props.caseId === 5 ? "button--menu selected" : "button--menu"
+        }
+        to={{ pathname: `/admin/new-movie` }}
+        onClick={() => props.changePage(5)}>
+        <p>Ajouter un film </p>
       </Link>
       <Link
-        className='button--menu'
-        to={{ pathname: `/admin/directors-items` }}>
-        <div>Afficher tous les réalisateurs</div>
+        className={
+          props.caseId === 6 ? "button--menu selected" : "button--menu"
+        }
+        to={{ pathname: `/admin/new-director` }}
+        onClick={() => props.changePage(6)}>
+        <p>Ajouter un réalisateur</p>
+      </Link>
+      <Link
+        className={
+          props.caseId === 7 ? "button--menu selected" : "button--menu"
+        }
+        to={{ pathname: `/admin/movies-items` }}
+        onClick={() => props.changePage(7)}>
+        <p>Afficher tous les films</p>
+      </Link>
+      <Link
+        className={
+          props.caseId === 8 ? "button--menu selected" : "button--menu"
+        }
+        to={{ pathname: `/admin/directors-items` }}
+        onClick={() => props.changePage(8)}>
+        <p>Afficher tous les réalisateurs</p>
       </Link>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  caseId: state.routingReducer.caseId,
+  showAsideMenu: state.routingReducer.showAsideMenu,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changePage: (aInt) => dispatch(changePage(aInt)),
+});
+
+const AsideMenu = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AsideMenuComponent);
 
 export { AsideMenu };

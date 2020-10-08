@@ -15,6 +15,7 @@ import {
 } from "./routes";
 import { HeaderHome } from "./composant";
 import {
+  AsideMenu,
   DashBoard,
   TableItems,
   NewMovie,
@@ -41,6 +42,7 @@ function App(props) {
     <BrowserRouter>
       <div className='App'>
         <HeaderHome />
+        <AsideMenu />
         <Switch>
           <Route exact path='/' render={() => <Home movies={props.movies} />} />
           <Route
@@ -67,7 +69,7 @@ function App(props) {
           <Route path='/account/:id' component={Account} />
 
           <DashBoard path='/admin/dashboard' />
-          {/*<Route
+          <Route
             path='/admin/new-movie'
             render={() => <NewMovie directors={props.directors} />}
           />
@@ -89,7 +91,7 @@ function App(props) {
           <Route
             path='/modify-director/:id'
             render={(props) => <ModifyDirector {...props} />}
-            />*/}
+          />
         </Switch>
       </div>
     </BrowserRouter>
