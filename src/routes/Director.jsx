@@ -19,7 +19,7 @@ function DirectorComponent(props) {
   }, [propsGetDirectorWithId, directorId]);
 
   const director = props.director && props.director[0];
-  console.log(props.director);
+
   const renderMoviesList = () => {
     return props.director.map((movie, i) => {
       return (

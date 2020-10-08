@@ -39,13 +39,13 @@ function MovieCard(props) {
               {props.wanted ? (
                 <IconButton
                   src={tagRemove}
-                  handleMovie={props.removeMovie}
+                  handleMovie={props.removeWantedMovie}
                   movieInfo={props.movie.id_movie}
                 />
               ) : (
                 <IconButton
                   src={tagAdd}
-                  handleMovie={props.addMovie}
+                  handleMovie={props.addWantedMovie}
                   movieInfo={props.movie}
                 />
               )}

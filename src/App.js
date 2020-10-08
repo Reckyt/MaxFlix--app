@@ -14,6 +14,15 @@ import {
   SignIn,
 } from "./routes";
 import { HeaderHome } from "./composant";
+import {
+  DashBoard,
+  TableItems,
+  NewMovie,
+  NewDirector,
+  ModifyMovie,
+  ModifyDirector,
+} from "./admin";
+
 import { getMovies } from "./action/moviesAction";
 import { getDirectors } from "./action/directorsAction";
 
@@ -34,9 +43,6 @@ function App(props) {
         <HeaderHome />
         <Switch>
           <Route exact path='/' render={() => <Home movies={props.movies} />} />
-          <Route path='/movie/:id' component={Movie} />
-          <Route path='/director/:id' component={Director} />
-          <Route path='/Player' component={Player} />
           <Route
             path='/moviesList'
             render={() => (
@@ -52,9 +58,38 @@ function App(props) {
               />
             )}
           />
+          <Route path='/movie/:id' component={Movie} />
+          <Route path='/director/:id' component={Director} />
+          <Route path='/Player' component={Player} />
+
           <Route path='/signUp' component={SignUp} />
           <Route path='/signIn' component={SignIn} />
           <Route path='/account/:id' component={Account} />
+
+          <DashBoard path='/admin/dashboard' />
+          {/*<Route
+            path='/admin/new-movie'
+            render={() => <NewMovie directors={props.directors} />}
+          />
+          <Route path='/admin/new-director' render={() => <NewDirector />} />
+          <Route
+            path='/admin/movies-items'
+            render={() => <TableItems items={props.movies} movie={true} />}
+          />
+          <Route
+            path='/admin/directors-items'
+            render={() => <TableItems items={props.directors} />}
+          />
+          <Route
+            path='/modify-movie/:id'
+            render={(props) => (
+              <ModifyMovie {...props} directors={props.directors} />
+            )}
+          />
+          <Route
+            path='/modify-director/:id'
+            render={(props) => <ModifyDirector {...props} />}
+            />*/}
         </Switch>
       </div>
     </BrowserRouter>

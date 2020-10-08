@@ -94,7 +94,8 @@
   border-radius: 5px;
 }
 
-.avatar {
+.avatar,
+.wheel {
   width: 35px;
   height: auto;
   /* color: white; */

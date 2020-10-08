@@ -7,6 +7,7 @@ import { searchMovie } from "../action/moviesAction";
 import { searchDirector } from "../action/directorsAction";
 
 import avatar from "../assets/pictures/compte.png";
+import wheel from "../assets/pictures/gear.svg";
 
 import "../css/HeaderHome.css";
 
@@ -46,13 +47,13 @@ function HeaderHomeComponent(props) {
               Réalisateurs
             </div>
           </Link>
-          <Link to='/series'>
+          {/*<Link to='/series'>
             <div
               className={props.caseId === 3 ? "selected" : null}
               onClick={() => props.changePage(3)}>
               Séries
             </div>
-          </Link>
+  </Link>*/}
         </div>
         <div className='headerHome--searchBar'>
           <input
@@ -65,6 +66,15 @@ function HeaderHomeComponent(props) {
               props.caseId === 4 ? "selected--avatar" : "container--avatar"
             }
             onClick={() => props.changePage(4)}>
+            <Link to={{ pathname: `/admin/dashboard` }}>
+              <img className='wheel' src={wheel} alt='wheel' />
+            </Link>
+          </div>
+          <div
+            className={
+              props.caseId === 5 ? "selected--avatar" : "container--avatar"
+            }
+            onClick={() => props.changePage(5)}>
             <Link to={{ pathname: `/account/${userId}` }}>
               <img className='avatar' src={avatar} alt='avatar' />
             </Link>

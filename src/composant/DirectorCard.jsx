@@ -9,7 +9,9 @@ function DirectorCard(props) {
   return (
     <div className='container--link'>
       <div className='directorCard'>
-        <Link to={{ pathname: `/director/${props.director.id_director}` }}>
+        <Link
+          key={props.i}
+          to={{ pathname: `/director/${props.director.id_director}` }}>
           <img
             className='directorCard--poster'
             src={noImage(props.director.picture)}

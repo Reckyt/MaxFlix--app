@@ -6,8 +6,8 @@ import { Loading, IconButton } from "../composant";
 
 import {
   getMovieWithId,
-  addMovie,
-  removeMovie,
+  addWantedMovie,
+  removeWantedMovie,
   seenMovie,
   unseenMovie,
 } from "../action/moviesAction";
@@ -32,8 +32,7 @@ function MovieComponent(props) {
     propsGetMovieWithId(movieId);
   }, [propsGetMovieWithId, movieId]);
 
-  const movie = props.movie && props.movie[0];
-  console.log(wishList);
+  const movie = props.movie && props.movie;
 
   const renderButtonToWatch = (movie) => {
     if (wishList && wishList.length > 0) {
@@ -42,7 +41,7 @@ function MovieComponent(props) {
           return (
             <IconButton
               src={tagRemove}
-              handleMovie={props.removeMovie}
+              handleMovie={props.removeWantedMovie}
               movieInfo={movie.id_movie}
             />
           );
@@ -50,7 +49,7 @@ function MovieComponent(props) {
           return (
             <IconButton
               src={tagAdd}
-              handleMovie={props.addMovie}
+              handleMovie={props.addWantedMovie}
               movieInfo={movie}
             />
           );
@@ -60,7 +59,7 @@ function MovieComponent(props) {
       return (
         <IconButton
           src={tagAdd}
-          handleMovie={props.addMovie}
+          handleMovie={props.addWantedMovie}
           movieInfo={movie}
         />
       );
@@ -158,8 +157,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getMovieWithId: (movieId) => dispatch(getMovieWithId(movieId)),
-  addMovie: (movie) => dispatch(addMovie(movie)),
-  removeMovie: (movieId) => dispatch(removeMovie(movieId)),
+  addWantedMovie: (movie) => dispatch(addWantedMovie(movie)),
+  removeWantedMovie: (movieId) => dispatch(removeWantedMovie(movieId)),
   seenMovie: (movie) => dispatch(seenMovie(movie)),
   unseenMovie: (movieId) => dispatch(unseenMovie(movieId)),
 });

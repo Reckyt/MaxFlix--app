@@ -2,8 +2,10 @@ import {
   GET_MOVIES,
   GET_MOVIES_WITH_ID,
   SEARCH_MOVIE,
-  ADD_MOVIE,
-  REMOVE_MOVIE,
+  UPDATE_MOVIE,
+  UPDATE_MOVIE_IN_DATABASE,
+  ADD_WANTED_MOVIE,
+  REMOVE_WANTED_MOVIE,
   SEEN_MOVIE,
   UNSEEN_MOVIE,
 } from "../action";
@@ -14,12 +16,23 @@ export const movieReducer = (state = {}, action) => {
       return { ...state, movies: action.payload };
 
     case GET_MOVIES_WITH_ID:
-      return { ...state, movie: action.payload };
+      let mov = action.payload;
+      const movieToUpdate = { ...mov };
+      return { ...state, movie: action.payload, movieToUpdate: movieToUpdate };
 
     case SEARCH_MOVIE:
       return { ...state, research: action.payload };
 
-    case ADD_MOVIE:
+    case UPDATE_MOVIE:
+      let movieUpdate = state.movieToUpdate;
+      movieUpdate[action.payload.targetName] = action.payload.targetValue;
+      state = { ...state, movieToUpdate: movieUpdate };
+      return state;
+
+    case UPDATE_MOVIE_IN_DATABASE:
+      return { ...state, movie: action.payload };
+
+    case ADD_WANTED_MOVIE:
       let wishList = JSON.parse(localStorage.getItem("wishList"));
       if (wishList) {
         wishList = [...wishList, action.payload];
@@ -30,7 +43,7 @@ export const movieReducer = (state = {}, action) => {
       localStorage.setItem("wishList", JSON.stringify(wishList));
       return { ...state, wishList: wishList };
 
-    case REMOVE_MOVIE:
+    case REMOVE_WANTED_MOVIE:
       let oldWishList = JSON.parse(localStorage.getItem("wishList"));
       let newWishList = oldWishList.filter(
         (movie) => movie.id_movie !== action.payload

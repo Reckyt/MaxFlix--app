@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import { MovieCard, NoResult, Burger, Menu } from "../composant";
 import {
-  addMovie,
-  removeMovie,
+  addWantedMovie,
+  removeWantedMovie,
   seenMovie,
   unseenMovie,
 } from "../action/moviesAction";
@@ -82,8 +82,8 @@ function MoviesListComponent(props) {
             movie={movie}
             wanted={wanted}
             seen={seen}
-            addMovie={props.addMovie}
-            removeMovie={props.removeMovie}
+            addWantedMovie={props.addWantedMovie}
+            removeWantedMovie={props.removeWantedMovie}
             seenMovie={props.seenMovie}
             unseenMovie={props.unseenMovie}
           />
@@ -121,8 +121,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addMovie: (movie) => dispatch(addMovie(movie)),
-  removeMovie: (movieId) => dispatch(removeMovie(movieId)),
+  addWantedMovie: (movie) => dispatch(addWantedMovie(movie)),
+  removeWantedMovie: (movieId) => dispatch(removeWantedMovie(movieId)),
   seenMovie: (movie) => dispatch(seenMovie(movie)),
   unseenMovie: (movieId) => dispatch(unseenMovie(movieId)),
 });

@@ -1,0 +1,26 @@
+.container--vignette {
+  width: 70%;
+  height: 100vh;
+  margin-left: 30rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.vignette {
+  width: 10rem;
+  height: 18rem;
+  border: 1px solid white;
+  margin: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vignette p {
+  margin: 0px 10px 0px 10px;
+  color: white;
+  text-decoration: none;
+}

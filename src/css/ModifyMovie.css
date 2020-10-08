@@ -1,0 +1,70 @@
+.container--modify--movie {
+  margin-left: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modify--movie {
+  width: 50%;
+  color: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.container--modify--movie h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin: 50px;
+  color: white;
+}
+
+.modify--movie--input {
+  width: 40%;
+  height: 7rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modify--movie--label {
+  width: 80%;
+}
+
+.modify--movie--input input,
+.modify--movie--input select {
+  width: 80%;
+  height: 2rem;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  margin-top: 5px;
+  background-color: #2b3c48;
+}
+
+.modify--movie--input textarea {
+  width: 80%;
+  height: 100px;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  margin-top: 5px;
+  background-color: #2b3c48;
+}
+
+.btn--add {
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  margin-top: 100px;
+  background-color: black;
+  cursor: pointer;
+}

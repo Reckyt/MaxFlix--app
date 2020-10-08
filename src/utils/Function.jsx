@@ -32,3 +32,33 @@ export const useOnClickOutside = (ref, handler) => {
     };
   }, [ref, handler]);
 };
+
+function pad(n) {
+  return n < 10 ? "0" + n : n;
+}
+
+export const convertDateToInput = (date) => {
+  if (date) {
+    var convertDate = new Date(date);
+    var day = convertDate.getDate();
+    var month = convertDate.getMonth();
+    var year = convertDate.getFullYear();
+    var mmddyyyy = year + "-" + pad(month + 1) + "-" + pad(day);
+    return mmddyyyy;
+  } else {
+    return "";
+  }
+};
+
+export const convertDateToPrint = (date) => {
+  if (date) {
+    var convertDate = new Date(date);
+    var day = convertDate.getDate();
+    var month = convertDate.getMonth();
+    var year = convertDate.getFullYear();
+    var mmddyyyy = pad(day) + "/" + pad(month + 1) + "/" + year;
+    return mmddyyyy;
+  } else {
+    return "";
+  }
+};

@@ -2,8 +2,10 @@ import {
   GET_MOVIES,
   GET_MOVIES_WITH_ID,
   SEARCH_MOVIE,
-  ADD_MOVIE,
-  REMOVE_MOVIE,
+  UPDATE_MOVIE,
+  UPDATE_MOVIE_IN_DATABASE,
+  ADD_WANTED_MOVIE,
+  REMOVE_WANTED_MOVIE,
   SEEN_MOVIE,
   UNSEEN_MOVIE,
 } from "./index";
@@ -39,7 +41,7 @@ export const getMovieWithId = (movieId) => (dispatch) => {
     .then((data) => {
       dispatch({
         type: GET_MOVIES_WITH_ID,
-        payload: data,
+        payload: data[0],
       });
     })
     .catch(function (error) {
@@ -56,20 +58,92 @@ export const searchMovie = (filteredMovies) => (dispatch) => {
   });
 };
 
-// ---------------------------------- ADD MOVIE -------------------------------------------------------
+// ---------------------------------- ADD NEW MOVIE -------------------------------------------------------
 
-export const addMovie = (movie) => (dispatch) => {
+export const addMovie = (newMovie) => (dispatch) => {
+  const url = process.env.REACT_APP_ADD_MOVIE;
+  var movieBody = {
+    title: newMovie.title,
+    year: newMovie.year,
+    poster: newMovie.poster,
+    link: newMovie.link,
+    kind: newMovie.kind,
+    synopsis: newMovie.synopsis,
+    actors: newMovie.actors,
+    director_id_director: newMovie.director_id_director,
+  };
+
+  Axios.put(url, movieBody);
+};
+
+// ---------------------------------- UPDATE MOVIE -------------------------------------------------------
+
+export const updateMovieScreen = (targetName, targetValue) => (dispatch) => {
   dispatch({
-    type: ADD_MOVIE,
+    type: UPDATE_MOVIE,
+    payload: { targetName: targetName, targetValue: targetValue },
+  });
+};
+
+export const updateMovieDatabase = (
+  movieId,
+  targetName,
+  targetValue,
+  movie
+) => (dispatch) => {
+  let name = targetName;
+  let value = targetValue;
+
+  if (movie[name] !== value) {
+    const url = process.env.REACT_APP_UPDATE_MOVIE.replace(
+      "#movieId#",
+      movieId
+    );
+
+    var movieBody = {
+      id: movieId,
+      [name]: value,
+    };
+
+    const postInit = {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(movieBody),
+    };
+
+    Axios.post(url).then(
+      dispatch({
+        type: UPDATE_MOVIE_IN_DATABASE,
+        payload: postInit.body,
+      })
+    );
+  }
+};
+
+export const updateMovieScreenAndDatabase = (
+  movieId,
+  targetName,
+  targetValue,
+  movie
+) => (dispatch) => {
+  dispatch(updateMovieScreen(targetName, targetValue));
+  dispatch(updateMovieDatabase(movieId, targetName, targetValue, movie));
+};
+
+// ---------------------------------- ADD WANTED MOVIE -------------------------------------------------------
+
+export const addWantedMovie = (movie) => (dispatch) => {
+  dispatch({
+    type: ADD_WANTED_MOVIE,
     payload: movie,
   });
 };
 
 // ---------------------------------- REMOVE MOVIE -------------------------------------------------------
 
-export const removeMovie = (movieId) => (dispatch) => {
+export const removeWantedMovie = (movieId) => (dispatch) => {
   dispatch({
-    type: REMOVE_MOVIE,
+    type: REMOVE_WANTED_MOVIE,
     payload: movieId,
   });
 };

@@ -26,18 +26,80 @@ function Home(props) {
   const handleClickGoMovie = () => {};
 
   const arrayLength = props.movies && props.movies.length;
-  let idMoviesCarousel = [];
+  let randomID = [];
 
   for (let i = 0; i < 10; i++) {
     let ramdomNumber = Math.floor(Math.random() * arrayLength) + 1;
-    idMoviesCarousel.push(ramdomNumber);
+    randomID.push(ramdomNumber);
   }
-  console.log(idMoviesCarousel);
+  console.log("randomID", randomID);
+
+  const carousel = randomID.map((idMovie, indexNumber) => {
+    return (
+      props.movies &&
+      props.movies.forEach((movie, indexMovie) => {
+        if (idMovie === movie.id_movie) {
+          console.log(movie);
+          return (
+            <div key={indexMovie}>
+              <figure
+                className='carousel--link'
+                style={{
+                  backgroundImage: `url(${movie.poster})`,
+                }}
+                onClick={() => handleClickGoMovie(movie.id_movie)}
+              />
+            </div>
+          );
+        }
+      })
+    );
+  });
+  console.log(carousel);
+
+  function random() {
+    randomID.map((id) => {
+      return function random(movies) {
+        return movies === id;
+      };
+    });
+  }
+
+  let moviesCarousel = props.movies && props.movies.filter(random);
+  console.log(moviesCarousel);
 
   return (
     <div className='home'>
       <h2>Découvrez cette sélection </h2>
-      <Carousel
+    </div>
+  );
+}
+
+export { Home };
+
+/*
+{idMoviesCarousel.map((idMovie, indexNumber) => {
+          props.movies &&
+            props.movies.map((movie, indexMovie) => {
+              if (idMovie === movie.id_movie) {
+                console.log(movie, idMovie);
+                return (
+                  <div key={indexMovie}>
+                    <figure
+                      className='carousel--link'
+                      style={{
+                        backgroundImage: `url(${movie.poster})`,
+                      }}
+                      onClick={() => handleClickGoMovie(movie.id_movie)}
+                    />
+                  </div>
+                );
+              }
+            });
+        })}*/
+
+/*
+        <Carousel
         sliderClass=''
         slidesToSlide={1}
         minimumTouchDrag={80}
@@ -55,29 +117,4 @@ function Home(props) {
         containerClass='carousel-container'
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass='custom-dot-list-style'
-        itemClass='carousel-item-padding-40-px'>
-        {idMoviesCarousel.map((idMovie, indexNumber) => {
-          props.movies &&
-            props.movies.filter((movie, indexMovie) => {
-              if (idMovie === movie.id_movie) {
-                console.log(movie, idMovie);
-                return (
-                  <div key={indexMovie}>
-                    <figure
-                      className='carousel--link'
-                      style={{
-                        backgroundImage: `url(${movie.poster})`,
-                      }}
-                      onClick={() => handleClickGoMovie(movie.id_movie)}
-                    />
-                  </div>
-                );
-              }
-            });
-        })}
-      </Carousel>
-    </div>
-  );
-}
-
-export { Home };
+        itemClass='carousel-item-padding-40-px'></Carousel>*/
