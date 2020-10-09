@@ -21,7 +21,6 @@ function NewDirectorComponent(props) {
     event.preventDefault();
     props.addDirector(newDirector);
   };
-  console.log(newDirector.date_of_birth);
 
   return (
     <form onSubmit={(event) => submit(event)}>

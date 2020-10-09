@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {} from "../action/caseAction";
 import { searchMovie } from "../action/moviesAction";
 import { searchDirector } from "../action/directorsAction";
 import { changePage, showAsideMenu } from "../action/routingAction";
@@ -14,6 +13,9 @@ import "../css/HeaderHome.css";
 
 function HeaderHomeComponent(props) {
   const [search, setSearch] = useState("");
+  const isLogged = localStorage.getItem("cool-jwt");
+
+  let admin = props.user && props.user.admin;
 
   const userId =
     props.userInfo && props.userInfo && props.userInfo.userData[0].id;
@@ -67,15 +69,17 @@ function HeaderHomeComponent(props) {
             value={search}
             onChange={handleSearch}
           />
-          <div
-            className={
-              props.caseId === 4 ? "selected--avatar" : "container--avatar"
-            }
-            onClick={() => handleMenu(4, true)}>
-            <Link to={{ pathname: `/admin/dashboard` }}>
-              <img className='wheel' src={wheel} alt='wheel' />
-            </Link>
-          </div>
+          {isLogged && admin ? (
+            <div
+              className={
+                props.caseId === 4 ? "selected--avatar" : "container--avatar"
+              }
+              onClick={() => handleMenu(4, true)}>
+              <Link to={{ pathname: `/admin/dashboard` }}>
+                <img className='wheel' src={wheel} alt='wheel' />
+              </Link>
+            </div>
+          ) : null}
           <div
             className={
               props.caseId === 5 ? "selected--avatar" : "container--avatar"
@@ -94,6 +98,7 @@ function HeaderHomeComponent(props) {
 
 const mapStateToProps = (state) => ({
   userInfo: state.userReducer.userInfo,
+  user: state.userReducer.user,
   caseId: state.routingReducer.caseId,
   moviesList: state.movieReducer.movies,
   directorsList: state.directorReducer.directors,

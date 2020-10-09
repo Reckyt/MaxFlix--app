@@ -11,6 +11,7 @@ export const addUser = (newUser) => (dispatch) => {
     firstname: newUser.firstname,
     mail: newUser.mail,
     password: newUser.password,
+    admin: false,
   };
 
   axios.post(url, user);
@@ -32,11 +33,8 @@ export const login = (userInfo) => (dispatch) => {
         type: LOGIN,
         payload: res.data,
       });
-      dispatch({
-        type: ISLOGGED,
-        payload: true,
-      });
       localStorage.setItem("cool-jwt", res.data.token);
+      localStorage.setItem("id-user", res.data.userData[0].id);
     })
     .catch((err) => alert("combinaison mail & mot de passe incorrect :( !!"));
 };

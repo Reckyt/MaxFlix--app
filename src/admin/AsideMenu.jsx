@@ -11,34 +11,34 @@ function AsideMenuComponent(props) {
     <div className={props.showAsideMenu ? "aside--menu" : "hide--aside--menu"}>
       <Link
         className={
-          props.caseId === 5 ? "button--menu selected" : "button--menu"
-        }
-        to={{ pathname: `/admin/new-movie` }}
-        onClick={() => props.changePage(5)}>
-        <p>Ajouter un film </p>
-      </Link>
-      <Link
-        className={
           props.caseId === 6 ? "button--menu selected" : "button--menu"
         }
-        to={{ pathname: `/admin/new-director` }}
+        to={{ pathname: `/admin/new-movie` }}
         onClick={() => props.changePage(6)}>
-        <p>Ajouter un réalisateur</p>
+        <p>Ajouter un film </p>
       </Link>
       <Link
         className={
           props.caseId === 7 ? "button--menu selected" : "button--menu"
         }
-        to={{ pathname: `/admin/movies-items` }}
+        to={{ pathname: `/admin/new-director` }}
         onClick={() => props.changePage(7)}>
-        <p>Afficher tous les films</p>
+        <p>Ajouter un réalisateur</p>
       </Link>
       <Link
         className={
           props.caseId === 8 ? "button--menu selected" : "button--menu"
         }
-        to={{ pathname: `/admin/directors-items` }}
+        to={{ pathname: `/admin/movies-items` }}
         onClick={() => props.changePage(8)}>
+        <p>Afficher tous les films</p>
+      </Link>
+      <Link
+        className={
+          props.caseId === 9 ? "button--menu selected" : "button--menu"
+        }
+        to={{ pathname: `/admin/directors-items` }}
+        onClick={() => props.changePage(9)}>
         <p>Afficher tous les réalisateurs</p>
       </Link>
     </div>

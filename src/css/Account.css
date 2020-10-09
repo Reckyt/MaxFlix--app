@@ -28,3 +28,20 @@
 .icon--eye {
   width: 50px;
 }
+
+.btn--deco {
+  position: absolute;
+  top: 110px;
+  right: 30px;
+}
+
+.deco {
+  width: 10rem;
+  height: 3rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}

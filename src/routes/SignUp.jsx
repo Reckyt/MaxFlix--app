@@ -12,6 +12,7 @@ function SignUpComponent(props) {
     firstname: "",
     mail: "",
     password: "",
+    admin: false,
   });
 
   const handleChange = (event) => {

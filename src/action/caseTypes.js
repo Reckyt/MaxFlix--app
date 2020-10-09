@@ -1,3 +1,0 @@
-const CHANGE_HEADER = "CHANGE_HEADER";
-
-export { CHANGE_HEADER };

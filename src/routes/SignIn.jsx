@@ -22,7 +22,6 @@ function SignInComponent(props) {
       props.history.push(`/account/${props.userInfo.userData[0].id}`);
     }
   };
-  // console.log(props.isLogged);
 
   return (
     <form onSubmit={(event) => submit(event)}>
@@ -57,11 +56,9 @@ function SignInComponent(props) {
         <Link to={{ pathname: "/signUp" }} className='link--inscription'>
           Pas de compte? S'inscrire
         </Link>
-        {/*<Link to='account'>*/}
         <button className='btn--signin' type='submit'>
           Se connecter
         </button>
-        {/*</Link>*/}
       </div>
     </form>
   );
@@ -69,7 +66,6 @@ function SignInComponent(props) {
 
 const mapStateToProps = (state) => ({
   userInfo: state.userReducer.userInfo,
-  isLogged: state.userReducer.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({

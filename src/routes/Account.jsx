@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { getUserWithId } from "../action/userAction";
-import { ISLOGGED } from "../action/userTypes.js";
+import { changePage } from "../action/routingAction";
 
 import tagRemove from "../assets/pictures/tagRemove.svg";
 import eyeRemove from "../assets/pictures/eyeRemove.svg";
@@ -11,25 +11,33 @@ import eyeRemove from "../assets/pictures/eyeRemove.svg";
 import "../css/Account.css";
 
 function AccountComponent(props) {
-  // const token = localStorage.getItem("cool-jwt");
-  const userId = props.match.params.id;
+  // const idUser = localStorage.getItem("id-user");
+  const isLogged = localStorage.getItem("cool-jwt");
+
+  // let userId;
   const name = props.user && props.user.firstname;
 
-  const propsGetUserWithId = props.getUserWithId;
+  // const propsGetUserWithId = props.getUserWithId;
 
-  useEffect(() => {
-    propsGetUserWithId(userId);
-  }, [propsGetUserWithId, userId]);
+  // if (props.match.params.id) {
+  //   userId = props.match.params.id;
+  // } else {
+  //   userId = idUser;
+  // }
+  // console.log(userId);
+
+  // useEffect(() => {
+  //   propsGetUserWithId(idUser);
+  // }, [propsGetUserWithId, idUser]);
 
   const handleDeconnect = (dispatch) => {
-    props.dispatch({
-      type: ISLOGGED,
-      payload: true,
-    });
+    localStorage.removeItem("cool-jwt");
+    localStorage.removeItem("id-user");
     props.history.push(`/`);
+    props.changePage(0);
   };
 
-  if (props.isLogged === false) {
+  if (!isLogged) {
     return <Redirect to='/signIn' />;
   }
 
@@ -50,8 +58,8 @@ function AccountComponent(props) {
           <h2>Liste des films vus</h2>
           <img className='icon--eye' src={eyeRemove} alt='fav' />
         </div>
-        <Link to='/'>
-          <button className='btn-deco' onClick={() => handleDeconnect()}>
+        <Link to='/' className='btn--deco'>
+          <button className='deco' onClick={() => handleDeconnect()}>
             Déconnexion
           </button>
         </Link>
@@ -62,13 +70,13 @@ function AccountComponent(props) {
 
 const mapStateToProps = (state) => ({
   user: state.userReducer.user,
-  isLogged: state.userReducer.isLogged,
   wishList: state.movieReducer.wishList,
   moviesSeen: state.movieReducer.moviesSeen,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getUserWithId: (userId) => dispatch(getUserWithId(userId)),
+  changePage: (aInt) => dispatch(changePage(aInt)),
 });
 
 const Account = connect(mapStateToProps, mapDispatchToProps)(AccountComponent);

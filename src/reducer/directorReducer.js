@@ -1,6 +1,7 @@
 import {
   GET_DIRECTORS,
   GET_DIRECTORS_WITH_ID,
+  DELETE_DIRECTOR,
   SEARCH_DIRECTOR,
   UPDATE_DIRECTOR,
   UPDATE_DIRECTOR_IN_DATABASE,
@@ -19,6 +20,13 @@ export const directorReducer = (state = {}, action) => {
         director: action.payload,
         directorToUpdate: directorToUpdate,
       };
+
+    case DELETE_DIRECTOR:
+      let oldListDirector = state.directors;
+      let newListDirector = oldListDirector.filter(
+        (director) => director.id_director !== action.payload
+      );
+      return { ...state, directors: newListDirector };
 
     case SEARCH_DIRECTOR:
       return { ...state, research: action.payload };

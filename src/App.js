@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 import {
   Home,
   Movie,
@@ -25,18 +24,24 @@ import {
 } from "./admin";
 
 import { getMovies } from "./action/moviesAction";
-import { getDirectors } from "./action/directorsAction";
+import { getUserWithId } from "./action/userAction";
+import { getDirectors, deleteDirector } from "./action/directorsAction";
 
 import "./App.css";
 
 function App(props) {
+  const idUser = localStorage.getItem("id-user");
+
   const propsGetMovies = props.getMovies;
-  const propsgetDirectors = props.getDirectors;
+  const propsGetDirectors = props.getDirectors;
+  const propsDeleteDirector = props.deleteDirector;
+  const propsGetUserWithId = props.getUserWithId;
 
   useEffect(() => {
     propsGetMovies();
-    propsgetDirectors();
-  }, [propsGetMovies, propsgetDirectors]);
+    propsGetDirectors();
+    propsGetUserWithId(idUser);
+  }, [propsGetMovies, propsGetDirectors, propsGetUserWithId, idUser]);
 
   return (
     <BrowserRouter>
@@ -73,14 +78,23 @@ function App(props) {
             path='/admin/new-movie'
             render={() => <NewMovie directors={props.directors} />}
           />
-          <Route path='/admin/new-director' render={() => <NewDirector />} />
+          <Route
+            path='/admin/new-director'
+            render={(...props) => <NewDirector {...props} />}
+          />
           <Route
             path='/admin/movies-items'
             render={() => <TableItems items={props.movies} movie={true} />}
           />
           <Route
             path='/admin/directors-items'
-            render={() => <TableItems items={props.directors} />}
+            render={() => (
+              <TableItems
+                items={props.directors}
+                getDirectors={propsGetDirectors}
+                deleteDirector={propsDeleteDirector}
+              />
+            )}
           />
           <Route
             path='/modify-movie/:id'
@@ -107,6 +121,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getMovies: () => dispatch(getMovies()),
   getDirectors: () => dispatch(getDirectors()),
+  deleteDirector: (directorId) => dispatch(deleteDirector(directorId)),
+  getUserWithId: (userId) => dispatch(getUserWithId(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

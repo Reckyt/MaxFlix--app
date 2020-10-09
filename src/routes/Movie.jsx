@@ -33,6 +33,7 @@ function MovieComponent(props) {
   }, [propsGetMovieWithId, movieId]);
 
   const movie = props.movie && props.movie;
+  console.log(movie);
 
   const renderButtonToWatch = (movie) => {
     if (wishList && wishList.length > 0) {

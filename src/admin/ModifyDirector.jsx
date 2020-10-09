@@ -22,7 +22,11 @@ function ModifyDirectorComponent(props) {
   }, [propsGetDirectorWithId, directorId]);
 
   const handleChange = (event) => {
-    props.updateDirectorScreen([event.target.name], event.target.value);
+    props.updateDirectorScreen(
+      { ...director },
+      [event.target.name],
+      event.target.value
+    );
   };
 
   const formatInput = (event) => {

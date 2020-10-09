@@ -1,8 +1,6 @@
 import { ADD_USER, LOGIN, GET_USER_WITH_ID, ISLOGGED } from "../action";
 
-const iniState = {
-  isLogged: false,
-};
+const iniState = {};
 
 export const userReducer = (state = iniState, action) => {
   switch (action.type) {
@@ -10,7 +8,7 @@ export const userReducer = (state = iniState, action) => {
       return { ...state, newUser: action.payload };
 
     case LOGIN:
-      return { ...state, userInfo: action.payload, isLogged: action };
+      return { ...state, userInfo: action.payload };
 
     case ISLOGGED:
       return { ...state, isLogged: action.payload };

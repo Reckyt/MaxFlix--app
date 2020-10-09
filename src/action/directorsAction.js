@@ -1,6 +1,7 @@
 import {
   GET_DIRECTORS,
   GET_DIRECTORS_WITH_ID,
+  DELETE_DIRECTOR,
   SEARCH_DIRECTOR,
   UPDATE_DIRECTOR,
   UPDATE_DIRECTOR_IN_DATABASE,
@@ -64,6 +65,19 @@ export const addDirector = (newDirector) => (dispatch) => {
   };
 
   Axios.put(url, directorBody);
+};
+
+// ---------------------------------- DELETE DIRECTOR -------------------------------------------------------
+
+export const deleteDirector = (directorId) => (dispatch) => {
+  const url = process.env.REACT_APP_DELETE_DIRECTOR;
+
+  Axios.delete(url.replace("#directorId#", directorId)).then(
+    dispatch({
+      type: DELETE_DIRECTOR,
+      payload: directorId,
+    })
+  );
 };
 
 // ---------------------------------- UPDATE DIRECTOR -------------------------------------------------------
