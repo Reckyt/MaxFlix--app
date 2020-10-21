@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import remove from "../assets/pictures/delete.svg";
@@ -6,22 +6,34 @@ import remove from "../assets/pictures/delete.svg";
 import "../css/TableItems.css";
 
 function TableItems(props) {
-  const getDirectors = props.getDirectors;
 
-  useEffect(() => {
-    if (!props.movie) {
-      getDirectors();
-    }
-  }, [getDirectors, props.movie]);
 
-  const handleDelete = (directorId) => {
-    props.deleteDirector(directorId);
+  let filteredMoviesList =
+    props.items &&
+    props.items.filter((movie) => {
+      if (props.research && props.movie) {
+        return (
+          movie.title.toLowerCase().includes(props.research.toLowerCase()) ||
+          movie.director
+            .toLowerCase()
+            .includes(props.research.trim().toLowerCase())
+        );
+      } else if (props.research && !props.movie) {
+        return movie.name.toLowerCase().includes(props.research.toLowerCase()) || movie.firstname.toLowerCase().includes(props.research.toLowerCase())
+      }
+      else {
+        return movie;
+      }
+    });
+
+  const handleDelete = (itemId) => {
+    props.deleteItem(itemId);
   };
+  console.log(filteredMoviesList)
 
   return (
     <div className='container--vignette'>
-      {props.items &&
-        props.items.map((item) => {
+      {filteredMoviesList && filteredMoviesList.map((item) => {
           const directorName = item.firstname + " " + item.name;
           return (
             <div className='vignette'>
@@ -36,14 +48,12 @@ function TableItems(props) {
                   src={props.movie ? item.poster : item.picture}
                   alt='poster'
                 />
-                {!props.movie && (
                   <img
                     src={remove}
                     alt='delete'
                     className='delete'
-                    onClick={() => handleDelete(item.id_director)}
+                    onClick={() => handleDelete(props.movie ? item.id_movie : item.id_director)}
                   />
-                )}
               </Link>
               <p>{props.movie ? item.title : directorName}</p>
             </div>

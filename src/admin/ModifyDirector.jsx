@@ -15,6 +15,7 @@ function ModifyDirectorComponent(props) {
   const directorId = props.match.params.id;
   const director = props.director && props.director[0];
   const directorToUpdate = props.directorToUpdate && props.directorToUpdate[0];
+
   const propsGetDirectorWithId = props.getDirectorWithId;
 
   useEffect(() => {
@@ -22,8 +23,8 @@ function ModifyDirectorComponent(props) {
   }, [propsGetDirectorWithId, directorId]);
 
   const handleChange = (event) => {
+    console.log([event.target.value])
     props.updateDirectorScreen(
-      { ...director },
       [event.target.name],
       event.target.value
     );
@@ -37,6 +38,14 @@ function ModifyDirectorComponent(props) {
       director
     );
   };
+  
+  const isUpdating = (valueDB, valueScreen) => {
+    if (valueDB === valueScreen) {
+      return "";
+    }
+    return "isUpdating";
+  };
+
 
   return (
     <div className='container--modify--director'>
@@ -48,11 +57,12 @@ function ModifyDirectorComponent(props) {
               <label>Nom</label>
             </div>
             <input
-              name='lastname'
+              name='name'
               value={directorToUpdate.name}
               onChange={handleChange}
               onBlur={formatInput}
-            />
+              className={isUpdating(director.name, directorToUpdate.name)}
+          />
           </div>
           <div className='modify--director--input'>
             <div className='modify--director--label '>
@@ -63,6 +73,7 @@ function ModifyDirectorComponent(props) {
               value={directorToUpdate.firstname}
               onChange={handleChange}
               onBlur={formatInput}
+              className={isUpdating(director.firstname, directorToUpdate.firstname)}
             />
           </div>
           <div className='modify--director--input'>
@@ -106,6 +117,7 @@ function ModifyDirectorComponent(props) {
 }
 
 const mapStateToProps = (state) => ({
+  ...state,
   director: state.directorReducer.director,
   directorToUpdate: state.directorReducer.directorToUpdate,
 });

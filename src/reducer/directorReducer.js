@@ -34,6 +34,7 @@ export const directorReducer = (state = {}, action) => {
     case UPDATE_DIRECTOR:
       let directorUpdate = state.directorToUpdate;
       directorUpdate[action.payload.targetName] = action.payload.targetValue;
+      console.log('reducer', directorUpdate[action.payload.targetValue])
       state = { ...state, directorToUpdate: directorUpdate };
       return state;
 

@@ -7,7 +7,7 @@ import {
   removeWantedMovie,
   seenMovie,
   unseenMovie,
-} from "../action/moviesAction";
+} from "../action/handleMovieAction";
 import { useOnClickOutside } from "../utils/Function";
 
 import "../css/MoviesList.css";
@@ -18,8 +18,8 @@ function MoviesListComponent(props) {
   const [kind, setKind] = useState("");
   let wanted;
   let seen;
-  let wishList = JSON.parse(localStorage.getItem("wishList"));
-  let moviesSeen = JSON.parse(localStorage.getItem("moviesSeen"));
+  // let props.wantedMovies = JSON.parse(localStorage.getItem("props.wantedMovies"));
+  // let props.seenMovies = JSON.parse(localStorage.getItem("props.seenMovies"));
 
   const node = useRef();
   useOnClickOutside(node, () => setOpen(false));
@@ -53,7 +53,7 @@ function MoviesListComponent(props) {
         return movie;
       }
     });
-
+  console.log(props.seenMovies);
   const renderList = (filteredMoviesList) => {
     if (filteredMoviesList.length === 0) {
       return <NoResult />;
@@ -61,16 +61,16 @@ function MoviesListComponent(props) {
       return filteredMoviesList.map((movie, i) => {
         wanted = false;
         seen = false;
-        if (wishList) {
-          wishList.forEach((wantedMovie) => {
-            if (movie.id_movie === wantedMovie.id_movie) {
+        if (props.wantedMovies) {
+          props.wantedMovies.forEach((wantedMovie) => {
+            if (movie.id_movie === wantedMovie.movie_id_movie) {
               wanted = true;
             }
           });
         }
-        if (moviesSeen) {
-          moviesSeen.forEach((seenMovie) => {
-            if (movie.id_movie === seenMovie.id_movie) {
+        if (props.seenMovies) {
+          props.seenMovies.forEach((seenMovie) => {
+            if (movie.id_movie === seenMovie.movie_id_movie) {
               seen = true;
             }
           });
@@ -116,15 +116,17 @@ function MoviesListComponent(props) {
 }
 
 const mapStateToProps = (state) => ({
-  wishList: state.movieReducer.wishList,
-  moviesSeen: state.movieReducer.moviesSeen,
+  wantedMovies: state.handleMovieReducer.wantedMovies,
+  seenMovies: state.handleMovieReducer.seenMovies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addWantedMovie: (movie) => dispatch(addWantedMovie(movie)),
-  removeWantedMovie: (movieId) => dispatch(removeWantedMovie(movieId)),
-  seenMovie: (movie) => dispatch(seenMovie(movie)),
-  unseenMovie: (movieId) => dispatch(unseenMovie(movieId)),
+  addWantedMovie: (idMovie, idUser) =>
+    dispatch(addWantedMovie(idMovie, idUser)),
+  removeWantedMovie: (idMovie, idUser) =>
+    dispatch(removeWantedMovie(idMovie, idUser)),
+  seenMovie: (idMovie, idUser) => dispatch(seenMovie(idMovie, idUser)),
+  unseenMovie: (idMovie, idUser) => dispatch(unseenMovie(idMovie, idUser)),
 });
 
 const MoviesList = connect(

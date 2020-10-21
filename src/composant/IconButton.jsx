@@ -7,7 +7,7 @@ function IconButton(props) {
         style={{ width: "30px", margin: "20px", cursor: "pointer" }}
         src={props.src}
         alt='icon'
-        onClick={() => props.handleMovie(props.movieInfo)}
+        onClick={() => props.handleMovie(props.movieId, props.userId)}
       />
     </div>
   );

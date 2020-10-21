@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import {  Redirect } from "react-router-dom";
 
 import { addDirector } from "../action/directorsAction";
 
@@ -20,6 +21,7 @@ function NewDirectorComponent(props) {
   const submit = (event) => {
     event.preventDefault();
     props.addDirector(newDirector);
+    return <Redirect to='/admin/directors-items'/>
   };
 
   return (

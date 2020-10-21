@@ -11,6 +11,8 @@ import "../css/MovieCard.css";
 import { IconButton } from "./";
 
 function MovieCard(props) {
+  const idUser = localStorage.getItem("id-user");
+
   const [hover, setHover] = useState(false);
 
   const showOverlay = () => {
@@ -40,26 +42,30 @@ function MovieCard(props) {
                 <IconButton
                   src={tagRemove}
                   handleMovie={props.removeWantedMovie}
-                  movieInfo={props.movie.id_movie}
+                  movieId={props.movie.id_movie}
+                  userId={idUser}
                 />
               ) : (
                 <IconButton
                   src={tagAdd}
                   handleMovie={props.addWantedMovie}
-                  movieInfo={props.movie}
+                  movieId={props.movie.id_movie}
+                  userId={idUser}
                 />
               )}
               {props.seen ? (
                 <IconButton
                   src={eyeRemove}
                   handleMovie={props.unseenMovie}
-                  movieInfo={props.movie.id_movie}
+                  movieId={props.movie.id_movie}
+                  userId={idUser}
                 />
               ) : (
                 <IconButton
                   src={eyeAdd}
                   handleMovie={props.seenMovie}
-                  movieInfo={props.movie}
+                  movieId={props.movie.id_movie}
+                  userId={idUser}
                 />
               )}
             </div>

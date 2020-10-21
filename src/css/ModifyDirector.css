@@ -68,3 +68,7 @@
   background-color: black;
   cursor: pointer;
 }
+
+.isUpdating {
+  font-style: italic;
+}

@@ -1,6 +1,7 @@
 import {
   GET_MOVIES,
   GET_MOVIES_WITH_ID,
+  DELETE_MOVIE,
   SEARCH_MOVIE,
   UPDATE_MOVIE,
   UPDATE_MOVIE_IN_DATABASE,
@@ -76,6 +77,19 @@ export const addMovie = (newMovie) => (dispatch) => {
   Axios.put(url, movieBody);
 };
 
+// ---------------------------------- DELETE DIRECTOR -------------------------------------------------------
+
+export const deleteMovie = (movieId) => (dispatch) => {
+  const url = process.env.REACT_APP_DELETE_MOVIE;
+
+  Axios.delete(url.replace("#movieId#", movieId)).then(
+    dispatch({
+      type: DELETE_MOVIE,
+      payload: movieId,
+    })
+  );
+};
+
 // ---------------------------------- UPDATE MOVIE -------------------------------------------------------
 
 export const updateMovieScreen = (targetName, targetValue) => (dispatch) => {
@@ -132,11 +146,20 @@ export const updateMovieScreenAndDatabase = (
 
 // ---------------------------------- ADD WANTED MOVIE -------------------------------------------------------
 
-export const addWantedMovie = (movie) => (dispatch) => {
-  dispatch({
-    type: ADD_WANTED_MOVIE,
-    payload: movie,
-  });
+export const addWantedMovie = (idMovie, idUser) => (dispatch) => {
+  const url = process.env.REACT_APP_ADD_MOVIE_IN_WISHLIST;
+  var wishListBody = {
+    movie_id_movie: idMovie,
+    user_id: idUser,
+  };
+  console.log("wishListBody", wishListBody);
+
+  Axios.put(url, wishListBody);
+
+  // dispatch({
+  //   type: ADD_WANTED_MOVIE,
+  //   payload: idMovie,
+  // });
 };
 
 // ---------------------------------- REMOVE MOVIE -------------------------------------------------------
