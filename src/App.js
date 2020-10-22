@@ -15,7 +15,6 @@ import {
 import { HeaderHome } from "./composant";
 import {
   AsideMenu,
-  DashBoard,
   TableItems,
   NewMovie,
   NewDirector,
@@ -27,6 +26,7 @@ import { getUserWithId } from "./action/userAction";
 import { getMovies, deleteMovie } from "./action/moviesAction";
 import { getDirectors, deleteDirector } from "./action/directorsAction";
 import { getWantedMovies, getSeenMovies } from "./action/handleMovieAction";
+import { getKinds } from "./action/kindAction";
 
 import "./App.css";
 
@@ -40,13 +40,15 @@ function App(props) {
   const propsGetUserWithId = props.getUserWithId;
   const propsGetWantedMovies = props.getWantedMovies;
   const propsGetSeenMovies = props.getSeenMovies;
+  const propsGetKinds = props.getKinds;
 
   useEffect(() => {
     propsGetMovies();
     propsGetDirectors();
     propsGetUserWithId(idUser);
-    propsGetWantedMovies();
-    propsGetSeenMovies();
+    propsGetWantedMovies(idUser);
+    propsGetSeenMovies(idUser);
+    propsGetKinds();
   }, [
     propsGetMovies,
     propsGetDirectors,
@@ -54,6 +56,7 @@ function App(props) {
     idUser,
     propsGetWantedMovies,
     propsGetSeenMovies,
+    propsGetKinds,
   ]);
 
   return (
@@ -66,7 +69,11 @@ function App(props) {
           <Route
             path='/moviesList'
             render={() => (
-              <MoviesList movies={props.movies} research={props.research} />
+              <MoviesList
+                movies={props.movies}
+                research={props.research}
+                kinds={props.kinds}
+              />
             )}
           />
           <Route
@@ -86,7 +93,6 @@ function App(props) {
           <Route path='/signIn' component={SignIn} />
           <Route path='/account/:id' component={Account} />
 
-          <DashBoard path='/admin/dashboard' />
           <Route
             path='/admin/new-movie'
             render={() => <NewMovie directors={props.directors} />}
@@ -136,6 +142,8 @@ const mapStateToProps = (state) => ({
   movies: state.movieReducer.movies,
   directors: state.directorReducer.directors,
   research: state.movieReducer.research,
+  user: state.userReducer.user,
+  kinds: state.kindReducer.kinds,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -144,8 +152,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteDirector: (itemId) => dispatch(deleteDirector(itemId)),
   deleteMovie: (itemId) => dispatch(deleteMovie(itemId)),
   getUserWithId: (userId) => dispatch(getUserWithId(userId)),
-  getWantedMovies: () => dispatch(getWantedMovies()),
-  getSeenMovies: () => dispatch(getSeenMovies()),
+  getWantedMovies: (userId) => dispatch(getWantedMovies(userId)),
+  getSeenMovies: (userId) => dispatch(getSeenMovies(userId)),
+  getKinds: () => dispatch(getKinds()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

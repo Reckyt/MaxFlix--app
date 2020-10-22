@@ -1,4 +1,4 @@
-import { LOGIN, GET_USER_WITH_ID, ISLOGGED } from "./index";
+import { LOGIN, GET_USER_WITH_ID } from "./index";
 
 import axios from "axios";
 

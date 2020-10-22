@@ -5,10 +5,6 @@ import {
   SEARCH_MOVIE,
   UPDATE_MOVIE,
   UPDATE_MOVIE_IN_DATABASE,
-  ADD_WANTED_MOVIE,
-  REMOVE_WANTED_MOVIE,
-  SEEN_MOVIE,
-  UNSEEN_MOVIE,
 } from "./index";
 
 import Axios from "axios";
@@ -142,49 +138,4 @@ export const updateMovieScreenAndDatabase = (
 ) => (dispatch) => {
   dispatch(updateMovieScreen(targetName, targetValue));
   dispatch(updateMovieDatabase(movieId, targetName, targetValue, movie));
-};
-
-// ---------------------------------- ADD WANTED MOVIE -------------------------------------------------------
-
-export const addWantedMovie = (idMovie, idUser) => (dispatch) => {
-  const url = process.env.REACT_APP_ADD_MOVIE_IN_WISHLIST;
-  var wishListBody = {
-    movie_id_movie: idMovie,
-    user_id: idUser,
-  };
-  console.log("wishListBody", wishListBody);
-
-  Axios.put(url, wishListBody);
-
-  // dispatch({
-  //   type: ADD_WANTED_MOVIE,
-  //   payload: idMovie,
-  // });
-};
-
-// ---------------------------------- REMOVE MOVIE -------------------------------------------------------
-
-export const removeWantedMovie = (movieId) => (dispatch) => {
-  dispatch({
-    type: REMOVE_WANTED_MOVIE,
-    payload: movieId,
-  });
-};
-
-// ---------------------------------- SEEN MOVIE -------------------------------------------------------
-
-export const seenMovie = (movie) => (dispatch) => {
-  dispatch({
-    type: SEEN_MOVIE,
-    payload: movie,
-  });
-};
-
-// ---------------------------------- UNSEEN MOVIE -------------------------------------------------------
-
-export const unseenMovie = (movieId) => (dispatch) => {
-  dispatch({
-    type: UNSEEN_MOVIE,
-    payload: movieId,
-  });
 };

@@ -13,12 +13,13 @@ import "../css/HeaderHome.css";
 
 function HeaderHomeComponent(props) {
   const [search, setSearch] = useState("");
+  const idUser = localStorage.getItem("id-user");
   const isLogged = localStorage.getItem("cool-jwt");
 
   let admin = props.user && props.user.admin;
 
-  const userId =
-    props.userInfo && props.userInfo && props.userInfo.userData[0].id;
+  // const userId =
+  //   props.userInfo && props.userInfo && props.userInfo.userData[0].id;
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -85,7 +86,7 @@ function HeaderHomeComponent(props) {
               props.caseId === 5 ? "selected--avatar" : "container--avatar"
             }
             onClick={() => handleMenu(5, false)}>
-            <Link to={{ pathname: `/account/${userId}` }}>
+            <Link to={{ pathname: `/account/${idUser}` }}>
               <img className='avatar' src={avatar} alt='avatar' />
             </Link>
           </div>

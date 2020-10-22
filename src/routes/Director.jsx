@@ -24,6 +24,7 @@ function DirectorComponent(props) {
     return props.director.map((movie, i) => {
       return (
         <Link
+          key={i}
           className='movie--title'
           to={{ pathname: `/movie/${movie.id_movie}` }}>
           {movie.title}

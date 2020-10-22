@@ -12,8 +12,39 @@
   align-items: center;
 }
 
+.bloc--wanted,
+.bloc--seen {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movies--list {
+  width: 100%;
+  height: 100vh;
+  color: white;
+}
+
+.movies--list li {
+  margin: 10px;
+  margin-left: 25%;
+  text-align: start;
+  color: white;
+}
+
+.movies--link {
+  color: grey;
+  text-decoration: none;
+}
+.movies--link:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .account--bloc {
-  width: 20%;
+  width: 50%;
   height: 10rem;
   color: white;
   font-size: 2rem;

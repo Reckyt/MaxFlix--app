@@ -2,21 +2,23 @@ import React from "react";
 
 import "../css/Menu.css";
 
-function Menu({ open, handleKind, handleDecade, kind, decade }) {
+function Menu({ open, handleKind, handleDecade, kinds, decade }) {
   return (
     <div className={open ? "menu--burger" : "menu--burger--hide"}>
       <span>Options de tri</span>
 
       <div className='sorting--menu'>
         <span className='sorting--label'>Genres :</span>
-        <select onChange={handleKind} value={kind}>
+        <select onChange={handleKind}>
           <option value=''></option>
-          <option value='science-fiction'>Science-fiction</option>
-          <option value='drame'>Drame</option>
-          <option value='thriller'>Thriller</option>
-          <option value='comédie'>Comédie</option>
-          <option value='horreur'>Horreur</option>
-          <option value='fantastique'>Fantastique</option>
+          {kinds &&
+            kinds.map((kind, i) => {
+              return (
+                <option key={i} value={kind.kind}>
+                  {kind.kind}
+                </option>
+              );
+            })}
         </select>
       </div>
       <div className='sorting--menu'>

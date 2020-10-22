@@ -1,5 +1,5 @@
 import React from "react";
-import { DirectorCard, NoResult } from "../composant";
+import { DirectorCard, NoResult, Loading } from "../composant";
 
 function DirectorsList(props) {
   let filteredDirectorsList =
@@ -33,9 +33,11 @@ function DirectorsList(props) {
     <div className='container--list'>
       <h1>Réalisateurs</h1>
       <div className='container--movies'>
-        {props.directors &&
-          props.directors.length > 0 &&
-          renderList(filteredDirectorsList)}
+        {props.directors && props.directors.length > 0 ? (
+          renderList(filteredDirectorsList)
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );

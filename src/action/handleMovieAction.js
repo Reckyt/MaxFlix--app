@@ -11,9 +11,9 @@ import Axios from "axios";
 
 // --------------------------------- GET ALL MOVIES --------------------------------------------------
 
-export const getWantedMovies = () => (dispatch) => {
+export const getWantedMovies = (userId) => (dispatch) => {
   const url = process.env.REACT_APP_GET_WANTED_MOVIES;
-  Axios.get(url)
+  Axios.get(url.replace("#userId#", userId))
     .then((res) => res.data)
     .then((data) => {
       dispatch({
@@ -28,9 +28,9 @@ export const getWantedMovies = () => (dispatch) => {
 
 // --------------------------------- GET ALL MOVIES --------------------------------------------------
 
-export const getSeenMovies = () => (dispatch) => {
+export const getSeenMovies = (userId) => (dispatch) => {
   const url = process.env.REACT_APP_GET_SEEN_MOVIES;
-  Axios.get(url)
+  Axios.get(url.replace("#userId#", userId))
     .then((res) => res.data)
     .then((data) => {
       dispatch({

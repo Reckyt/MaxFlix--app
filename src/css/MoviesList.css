@@ -20,3 +20,14 @@
   display: flex;
   flex-flow: wrap;
 }
+
+#scroll_to_top {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  bottom: 3%;
+  right: 2%;
+}
+#scroll_to_top img {
+  width: 25px;
+}

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { addMovie } from "../action/moviesAction";
+import { getKinds } from "../action/kindAction";
 
 import "../css/NewMovie.css";
 
@@ -16,6 +17,12 @@ function NewMovieComponent(props) {
     actors: "",
     director: "",
   });
+
+  const propsGetKinds = props.getKinds;
+
+  useEffect(() => {
+    propsGetKinds();
+  }, [propsGetKinds]);
 
   const handleChange = (event) => {
     setNewMovie({ ...newMovie, [event.target.name]: event.target.value });
@@ -38,6 +45,57 @@ function NewMovieComponent(props) {
       event.target.value = event.target.value.slice(0, 4);
     }
   }
+
+  const renderKindList = () => {
+    return (
+      props.kinds &&
+      props.kinds.map((kind, i) => {
+        return (
+          <div>
+            <div className='form--movie--label required'>
+              <label>{kind.kind}</label>
+            </div>
+            <input
+              key={i}
+              type='checkbox'
+              name={kind.kind}
+              value={kind.kind}
+              className='input--kind'></input>
+          </div>
+        );
+      })
+    );
+  };
+
+  const renderKindList2 = () => {
+    return (
+      <div>
+        <div className='form--movie--label required'>
+          <label>Genres</label>
+        </div>
+        <select
+          className='select--kind'
+          multiple
+          size='3'
+          name='kind'
+          value={newMovie.kind}
+          onChange={handleChange}
+          onBlur={formatInput}
+          required>
+          {props.kinds &&
+            props.kinds.map((kind, i) => {
+              return (
+                <option key={i} value={kind.id_user} className='option--kind'>
+                  {kind.kind}
+                </option>
+              );
+            })}
+        </select>
+      </div>
+    );
+  };
+
+  console.log(props.kinds);
 
   return (
     <form onSubmit={(event) => submit(event)}>
@@ -93,17 +151,11 @@ function NewMovieComponent(props) {
               onBlur={formatInput}
             />
           </div>
-          <div className='form--movie--input'>
-            <div className='form--movie--label required'>
+          <div className='form--movie--input--kind'>
+            {/*<div className='form--movie--label required'>
               <label>Genre</label>
-            </div>
-            <input
-              name='kind'
-              value={newMovie.kind}
-              onChange={handleChange}
-              onBlur={formatInput}
-              required
-            />
+  </div>*/}
+            <div className='container--input--kind'>{renderKindList2()}</div>
           </div>
           <div className='form--movie--input'>
             <div className='form--movie--label required'>
@@ -126,7 +178,7 @@ function NewMovieComponent(props) {
                 })}
             </select>
           </div>
-          <div className='form--movie--input'>
+          {/*<div className='form--movie--input'>
             <div className='form--movie--label'>
               <label>Acteurs principaux</label>
             </div>
@@ -136,7 +188,7 @@ function NewMovieComponent(props) {
               onChange={handleChange}
               onBlur={formatInput}
             />
-          </div>
+              </div>*/}
           <div className='form--movie--input'>
             <div className='form--movie--label required'>
               <label>Synopsis</label>
@@ -158,9 +210,17 @@ function NewMovieComponent(props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  kinds: state.kindReducer.kinds,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addMovie: (newMovie) => dispatch(addMovie(newMovie)),
+  getKinds: () => dispatch(getKinds()),
 });
-const NewMovie = connect(null, mapDispatchToProps)(NewMovieComponent);
+const NewMovie = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewMovieComponent);
 
 export { NewMovie };

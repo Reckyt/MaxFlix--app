@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 
-import { MovieCard, NoResult, Burger, Menu } from "../composant";
+import { MovieCard, NoResult, Burger, Menu, Loading } from "../composant";
 import {
   addWantedMovie,
   removeWantedMovie,
@@ -9,6 +9,8 @@ import {
   unseenMovie,
 } from "../action/handleMovieAction";
 import { useOnClickOutside } from "../utils/Function";
+
+import upArrow from "../assets/pictures/upArrow.svg";
 
 import "../css/MoviesList.css";
 
@@ -18,8 +20,6 @@ function MoviesListComponent(props) {
   const [kind, setKind] = useState("");
   let wanted;
   let seen;
-  // let props.wantedMovies = JSON.parse(localStorage.getItem("props.wantedMovies"));
-  // let props.seenMovies = JSON.parse(localStorage.getItem("props.seenMovies"));
 
   const node = useRef();
   useOnClickOutside(node, () => setOpen(false));
@@ -43,17 +43,26 @@ function MoviesListComponent(props) {
             .includes(props.research.trim().toLowerCase())
         );
       } else if (decade) {
-        let i = decade;
-        for (i; i <= i + 10; i++) {
+        let i = Number(decade);
+        for (i; i < i + 10; i++) {
+          console.log(i);
           return movie.year === i;
         }
       } else if (kind) {
         return movie.kind.toLowerCase().includes(kind.toLowerCase());
+      } else if (decade && kind) {
+        let i = Number(decade);
+        for (i; i <= i + 10; i++) {
+          return (
+            movie.kind.toLowerCase().includes(kind.toLowerCase()) &&
+            movie.year === i
+          );
+        }
       } else {
         return movie;
       }
     });
-  console.log(props.seenMovies);
+
   const renderList = (filteredMoviesList) => {
     if (filteredMoviesList.length === 0) {
       return <NoResult />;
@@ -102,14 +111,22 @@ function MoviesListComponent(props) {
           setOpen={setOpen}
           handleDecade={handleDecade}
           handleKind={handleKind}
+          kinds={props.kinds}
           kind={kind}
           decade={decade}
         />
       </div>
       <div className='container--movies'>
-        {props.movies &&
-          props.movies.length > 0 &&
-          renderList(filteredMoviesList)}
+        {props.movies && props.movies.length > 0 ? (
+          renderList(filteredMoviesList)
+        ) : (
+          <Loading />
+        )}
+      </div>
+      <div id='scroll_to_top'>
+        <a href='#top'>
+          <img src={upArrow} alt='Retourner en haut' />
+        </a>
       </div>
     </div>
   );

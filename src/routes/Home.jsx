@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -23,98 +24,58 @@ function Home(props) {
     },
   };
 
-  const handleClickGoMovie = () => {};
-
-  const arrayLength = props.movies && props.movies.length;
-  let randomID = [];
-
-  for (let i = 0; i < 10; i++) {
-    let ramdomNumber = Math.floor(Math.random() * arrayLength) + 1;
-    randomID.push(ramdomNumber);
-  }
-  console.log("randomID", randomID);
-
-  const carousel = randomID.map((idMovie, indexNumber) => {
-    return (
-      props.movies &&
-      props.movies.forEach((movie, indexMovie) => {
-        if (idMovie === movie.id_movie) {
-          console.log(movie);
-          return (
-            <div key={indexMovie}>
-              <figure
-                className='carousel--link'
-                style={{
-                  backgroundImage: `url(${movie.poster})`,
-                }}
-                onClick={() => handleClickGoMovie(movie.id_movie)}
-              />
-            </div>
-          );
-        }
-      })
-    );
-  });
-  console.log(carousel);
-
-  function random() {
-    randomID.map((id) => {
-      return function random(movies) {
-        return movies === id;
-      };
-    });
-  }
-
-  let moviesCarousel = props.movies && props.movies.filter(random);
-  console.log(moviesCarousel);
+  const carouselMovies =
+    props.movies &&
+    props.movies.splice(Math.floor(Math.random() * props.movies.length), 10);
 
   return (
     <div className='home'>
       <h2>Découvrez cette sélection </h2>
-    </div>
-  );
-}
-
-export { Home };
-
-/*
-{idMoviesCarousel.map((idMovie, indexNumber) => {
-          props.movies &&
-            props.movies.map((movie, indexMovie) => {
-              if (idMovie === movie.id_movie) {
-                console.log(movie, idMovie);
-                return (
-                  <div key={indexMovie}>
+      {carouselMovies && (
+        <Carousel
+          sliderClass=''
+          slidesToSlide={1}
+          minimumTouchDrag={80}
+          additionalTransfrom={0}
+          centerMode={true}
+          swipeable={true}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          keyBoardControl={true}
+          customTransition='all 0.4'
+          transitionDuration={100}
+          containerClass='carousel-container'
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          dotListClass='custom-dot-list-style'
+          itemClass='carousel-item-padding-40-px'>
+          {carouselMovies !== 0 &&
+            carouselMovies.map((movie, i) => {
+              return (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}>
+                  <Link to={{ pathname: `/movie/${movie.id_movie}` }}>
                     <figure
                       className='carousel--link'
                       style={{
                         backgroundImage: `url(${movie.poster})`,
                       }}
-                      onClick={() => handleClickGoMovie(movie.id_movie)}
                     />
-                  </div>
-                );
-              }
-            });
-        })}*/
+                  </Link>
+                </div>
+              );
+            })}
+        </Carousel>
+      )}
+    </div>
+  );
+}
 
-/*
-        <Carousel
-        sliderClass=''
-        slidesToSlide={1}
-        minimumTouchDrag={80}
-        additionalTransfrom={0}
-        centerMode={true}
-        swipeable={true}
-        draggable={false}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        keyBoardControl={true}
-        customTransition='all 0.4'
-        transitionDuration={100}
-        containerClass='carousel-container'
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass='custom-dot-list-style'
-        itemClass='carousel-item-padding-40-px'></Carousel>*/
+export { Home };

@@ -73,3 +73,36 @@
   content: " *";
   color: red;
 }
+
+/* ----------------------------------- */
+
+.form--movie--input--kind {
+  width: 40%;
+  height: 7rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container--input--kind {
+  width: 80%;
+  /* margin: 10px; */
+  /* border: solid 1px white; */
+}
+
+.form--movie--input--kind .input--kind {
+  width: 5%;
+}
+
+.option--kind {
+  background: #2b3c48;
+  /* width: 100%; */
+}
+
+.select--kind {
+  width: 100%;
+  font-size: 1rem;
+  /* overflow: hidden; */
+}

@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { IconButton } from "./";
+
+import {
+  styleWanted,
+  styleSeen,
+  styleRemoveWanted,
+  styleRemoveSeen,
+} from "../utils/style";
 import { noPoster } from "../utils/Function";
+
 import tagRemove from "../assets/pictures/tagRemove.svg";
 import tagAdd from "../assets/pictures/tagAdd.svg";
 import eyeRemove from "../assets/pictures/eyeRemove.svg";
 import eyeAdd from "../assets/pictures/eyeAdd.svg";
 
 import "../css/MovieCard.css";
-import { IconButton } from "./";
 
 function MovieCard(props) {
   const idUser = localStorage.getItem("id-user");
+  const isLogged = localStorage.getItem("cool-jwt");
 
   const [hover, setHover] = useState(false);
 
@@ -36,7 +45,7 @@ function MovieCard(props) {
               alt='poster'
             />
           </Link>
-          {hover ? (
+          {hover && isLogged ? (
             <div className='movieCard--icon'>
               {props.wanted ? (
                 <IconButton
@@ -44,6 +53,8 @@ function MovieCard(props) {
                   handleMovie={props.removeWantedMovie}
                   movieId={props.movie.id_movie}
                   userId={idUser}
+                  content={"Retirer des films à voir"}
+                  style={styleRemoveWanted}
                 />
               ) : (
                 <IconButton
@@ -51,6 +62,8 @@ function MovieCard(props) {
                   handleMovie={props.addWantedMovie}
                   movieId={props.movie.id_movie}
                   userId={idUser}
+                  content={"Ajouter aux film à voir"}
+                  style={styleWanted}
                 />
               )}
               {props.seen ? (
@@ -59,6 +72,8 @@ function MovieCard(props) {
                   handleMovie={props.unseenMovie}
                   movieId={props.movie.id_movie}
                   userId={idUser}
+                  content={"Retirer des films Vu"}
+                  style={styleRemoveSeen}
                 />
               ) : (
                 <IconButton
@@ -66,6 +81,8 @@ function MovieCard(props) {
                   handleMovie={props.seenMovie}
                   movieId={props.movie.id_movie}
                   userId={idUser}
+                  content={"Ajouter aux films vu"}
+                  style={styleSeen}
                 />
               )}
             </div>

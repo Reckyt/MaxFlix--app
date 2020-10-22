@@ -4,100 +4,136 @@ import { connect } from "react-redux";
 
 import { Loading, IconButton } from "../composant";
 
+import { getMovieWithId } from "../action/moviesAction";
+
 import {
-  getMovieWithId,
   addWantedMovie,
   removeWantedMovie,
   seenMovie,
   unseenMovie,
-} from "../action/moviesAction";
+} from "../action/handleMovieAction";
 
+import {
+  styleWantedPageMovie,
+  styleSeenPageMovie,
+  styleRemoveWantedPageMovie,
+  styleRemoveSeenPageMovie,
+} from "../utils/style";
 import { noPoster } from "../utils/Function";
 
-import "../css/Movie.css";
 import play from "../assets/pictures/play.svg";
 import tagRemove from "../assets/pictures/tagRemove.svg";
 import tagAdd from "../assets/pictures/tagAdd.svg";
 import eyeRemove from "../assets/pictures/eyeRemove.svg";
 import eyeAdd from "../assets/pictures/eyeAdd.svg";
 
-function MovieComponent(props) {
-  const movieId = props.match.params.id;
+import "../css/Movie.css";
 
-  let wishList = JSON.parse(localStorage.getItem("wishList"));
-  let moviesSeen = JSON.parse(localStorage.getItem("moviesSeen"));
+function MovieComponent(props) {
+  const idUser = localStorage.getItem("id-user");
+  const isLogged = localStorage.getItem("cool-jwt");
+  const movieId = props.match.params.id;
+  const movie = props.movie && props.movie;
+  const seenMovies = props.seenMovies && props.seenMovies;
+  const wantedMovies = props.wantedMovies && props.wantedMovies;
   const propsGetMovieWithId = props.getMovieWithId;
 
   useEffect(() => {
     propsGetMovieWithId(movieId);
   }, [propsGetMovieWithId, movieId]);
 
-  const movie = props.movie && props.movie;
-  console.log(movie);
-
-  const renderButtonToWatch = (movie) => {
-    if (wishList && wishList.length > 0) {
-      return wishList.map((wantedMovie) => {
-        if (wantedMovie.id_movie === movie.id_movie) {
-          return (
-            <IconButton
-              src={tagRemove}
-              handleMovie={props.removeWantedMovie}
-              movieInfo={movie.id_movie}
-            />
-          );
-        } else {
-          return (
-            <IconButton
-              src={tagAdd}
-              handleMovie={props.addWantedMovie}
-              movieInfo={movie}
-            />
-          );
+  let wanted = false;
+  const renderIfMovieIsWanted = (movie, wantedMovies) => {
+    if (wantedMovies && wantedMovies.length > 0) {
+      return wantedMovies.find((aMovie) => {
+        if (movie) {
+          if (aMovie.movie_id_movie === movie.id_movie) {
+            return (wanted = true);
+          } else {
+            return (wanted = false);
+          }
         }
       });
+    } else {
+      return (wanted = false);
+    }
+  };
+
+  let seen = false;
+  const renderIfMovieIsSeen = (movie, seenMovies) => {
+    if (seenMovies && seenMovies.length > 0) {
+      return seenMovies.find((aMovie) => {
+        if (movie) {
+          if (aMovie.movie_id_movie === movie.id_movie) {
+            return (seen = true);
+          } else {
+            return (seen = false);
+          }
+        }
+      });
+    } else {
+      return (seen = false);
+    }
+  };
+
+  renderIfMovieIsWanted(movie, wantedMovies);
+  renderIfMovieIsSeen(movie, seenMovies);
+
+  const renderButtonWantedMovies = () => {
+    if (wanted) {
+      return (
+        <IconButton
+          src={tagRemove}
+          handleMovie={props.removeWantedMovie}
+          movieId={movie.id_movie}
+          userId={idUser}
+          content={"Retirer des films à voir"}
+          style={styleRemoveWantedPageMovie}
+        />
+      );
     } else {
       return (
         <IconButton
           src={tagAdd}
           handleMovie={props.addWantedMovie}
-          movieInfo={movie}
+          movieId={movie.id_movie}
+          userId={idUser}
+          content={"Ajouter aux film à voir"}
+          style={styleWantedPageMovie}
         />
       );
     }
   };
 
-  const renderButtonSeen = (movie) => {
-    if (moviesSeen && moviesSeen.length > 0) {
-      return moviesSeen.map((aMovie) => {
-        if (aMovie.id_movie === movie.id_movie) {
-          return (
-            <IconButton
-              src={eyeRemove}
-              handleMovie={props.unseenMovie}
-              movieInfo={movie.id_movie}
-            />
-          );
-        } else {
-          return (
-            <IconButton
-              src={eyeAdd}
-              handleMovie={props.seenMovie}
-              movieInfo={movie}
-            />
-          );
-        }
-      });
+  const renderButtonSeenMovies = () => {
+    if (seen) {
+      return (
+        <IconButton
+          src={eyeRemove}
+          handleMovie={props.unseenMovie}
+          movieId={movie.id_movie}
+          userId={idUser}
+          content={"Retirer des films Vu"}
+          style={styleRemoveSeenPageMovie}
+        />
+      );
     } else {
       return (
         <IconButton
           src={eyeAdd}
           handleMovie={props.seenMovie}
-          movieInfo={movie}
+          movieId={movie.id_movie}
+          userId={idUser}
+          content={"Ajouter aux films vu"}
+          style={styleSeenPageMovie}
         />
       );
     }
   };
+
+  console.log("wanted", wanted);
+  console.log("seen", seen);
+  console.log(movie);
 
   return (
     <div>
@@ -129,10 +165,12 @@ function MovieComponent(props) {
             </div>
             <div>
               <div className='container--icons'>
-                <div className='icons'>
-                  {renderButtonToWatch(movie)}
-                  {renderButtonSeen(movie)}
-                </div>
+                {isLogged && (
+                  <div className='icons'>
+                    {renderButtonWantedMovies()}
+                    {renderButtonSeenMovies()}
+                  </div>
+                )}
                 <Link
                   to={{ pathname: `/player` }}
                   className='container--buttonWatch'>
@@ -152,16 +190,18 @@ function MovieComponent(props) {
 
 const mapStateToProps = (state) => ({
   movie: state.movieReducer.movie,
-  // wishList: state.movieReducer.wishList,
-  // moviesSeen: state.movieReducer.moviesSeen,
+  wantedMovies: state.handleMovieReducer.wantedMovies,
+  seenMovies: state.handleMovieReducer.seenMovies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getMovieWithId: (movieId) => dispatch(getMovieWithId(movieId)),
-  addWantedMovie: (movie) => dispatch(addWantedMovie(movie)),
-  removeWantedMovie: (movieId) => dispatch(removeWantedMovie(movieId)),
-  seenMovie: (movie) => dispatch(seenMovie(movie)),
-  unseenMovie: (movieId) => dispatch(unseenMovie(movieId)),
+  addWantedMovie: (idMovie, idUser) =>
+    dispatch(addWantedMovie(idMovie, idUser)),
+  removeWantedMovie: (idMovie, idUser) =>
+    dispatch(removeWantedMovie(idMovie, idUser)),
+  seenMovie: (idMovie, idUser) => dispatch(seenMovie(idMovie, idUser)),
+  unseenMovie: (idMovie, idUser) => dispatch(unseenMovie(idMovie, idUser)),
 });
 
 const Movie = connect(mapStateToProps, mapDispatchToProps)(MovieComponent);

@@ -6,8 +6,6 @@ import remove from "../assets/pictures/delete.svg";
 import "../css/TableItems.css";
 
 function TableItems(props) {
-
-
   let filteredMoviesList =
     props.items &&
     props.items.filter((movie) => {
@@ -19,9 +17,11 @@ function TableItems(props) {
             .includes(props.research.trim().toLowerCase())
         );
       } else if (props.research && !props.movie) {
-        return movie.name.toLowerCase().includes(props.research.toLowerCase()) || movie.firstname.toLowerCase().includes(props.research.toLowerCase())
-      }
-      else {
+        return (
+          movie.name.toLowerCase().includes(props.research.toLowerCase()) ||
+          movie.firstname.toLowerCase().includes(props.research.toLowerCase())
+        );
+      } else {
         return movie;
       }
     });
@@ -29,11 +29,11 @@ function TableItems(props) {
   const handleDelete = (itemId) => {
     props.deleteItem(itemId);
   };
-  console.log(filteredMoviesList)
 
   return (
     <div className='container--vignette'>
-      {filteredMoviesList && filteredMoviesList.map((item) => {
+      {filteredMoviesList &&
+        filteredMoviesList.map((item) => {
           const directorName = item.firstname + " " + item.name;
           return (
             <div className='vignette'>
@@ -48,12 +48,14 @@ function TableItems(props) {
                   src={props.movie ? item.poster : item.picture}
                   alt='poster'
                 />
-                  <img
-                    src={remove}
-                    alt='delete'
-                    className='delete'
-                    onClick={() => handleDelete(props.movie ? item.id_movie : item.id_director)}
-                  />
+                <img
+                  src={remove}
+                  alt='delete'
+                  className='delete'
+                  onClick={() =>
+                    handleDelete(props.movie ? item.id_movie : item.id_director)
+                  }
+                />
               </Link>
               <p>{props.movie ? item.title : directorName}</p>
             </div>

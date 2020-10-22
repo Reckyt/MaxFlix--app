@@ -1,8 +1,6 @@
 import React from "react";
 import ReactPlayer from "react-player";
 
-// import bunny from "../assets/BigBuckBunny.mp4";
-
 function PlayerComponent() {
   const style = {
     position: "relative",
