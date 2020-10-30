@@ -9,6 +9,7 @@ export const styleWanted = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  boxShadow: "5px 5px 25px 0px #000000",
 };
 export const styleSeen = {
   top: "60%",
