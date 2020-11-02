@@ -1,4 +1,3 @@
-export * from "./DashBoard";
 export * from "./AsideMenu";
 export * from "./NewMovie";
 export * from "./ModifyMovie";
