@@ -43,8 +43,7 @@ function MoviesListComponent(props) {
             .includes(props.research.trim().toLowerCase())
         );
       } else if (decade) {
-        let i = Number(decade);
-        for (i; i < i + 10; i++) {
+        for (let i = Number(decade); i < Number(decade) + 10; i++) {
           console.log(i);
           return movie.year === i;
         }
