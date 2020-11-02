@@ -83,7 +83,7 @@ export const deleteDirector = (directorId) => (dispatch) => {
 // ---------------------------------- UPDATE DIRECTOR -------------------------------------------------------
 
 export const updateDirectorScreen = (targetName, targetValue) => (dispatch) => {
-  console.log('action', targetValue)
+  console.log("action", targetValue);
   dispatch({
     type: UPDATE_DIRECTOR,
     payload: { targetName: targetName, targetValue: targetValue },

@@ -131,10 +131,6 @@ function MovieComponent(props) {
     }
   };
 
-  console.log("wanted", wanted);
-  console.log("seen", seen);
-  console.log(movie);
-
   return (
     <div>
       {props.movie && props.movie ? (
