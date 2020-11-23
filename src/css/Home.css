@@ -12,12 +12,17 @@
 }
 
 .carousel--link {
-  width: 355px;
-  height: 500px;
+  width: 380px;
+  height: 532px;
   margin: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   background-size: cover;
   cursor: pointer;
+}
+
+.carousel--link:hover {
+  transform: scale(1.15);
+  transition: all 0.5s ease-in-out;
 }
 
 .text {

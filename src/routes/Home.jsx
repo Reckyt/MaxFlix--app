@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+import { Loading } from "../composant";
+
 import "../css/Home.css";
 
 function Home(props) {
@@ -31,7 +33,7 @@ function Home(props) {
   return (
     <div className='home'>
       <h2>Découvrez cette sélection </h2>
-      {carouselMovies && (
+      {carouselMovies && carouselMovies ? (
         <Carousel
           sliderClass=''
           slidesToSlide={1}
@@ -73,9 +75,12 @@ function Home(props) {
               );
             })}
         </Carousel>
+      ) : (
+        <Loading />
       )}
     </div>
   );
 }
 
 export { Home };
+// {carouselMovies && (

@@ -15,7 +15,7 @@ function PlayerComponent() {
   return (
     <div style={style}>
       <ReactPlayer
-        url='https://www.dropbox.com/s/oco66cg382nhhg8/Cuba.mp4?dl=0'
+        url='https://www.dropbox.com/s/mik5i6iy8tqgs41/contenu%20bloqu%C3%A9.mp4?dl=0'
         controls
         playing={false}
         width='100%'

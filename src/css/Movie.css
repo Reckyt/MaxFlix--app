@@ -47,10 +47,13 @@
 }
 
 .infoClic {
-  color: white;
+  color: grey;
   font-size: 15px;
   margin-left: 14rem;
   display: inline;
+}
+.infoClic:hover {
+  color: white;
 }
 
 .synopsis {

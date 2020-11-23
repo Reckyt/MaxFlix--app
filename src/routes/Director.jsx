@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Loading } from "../composant";
 
 import { getDirectorWithId } from "../action/directorsAction";
+import { changePage } from "../action/routingAction";
 import { noImage } from "../utils/Function";
 
 import "../css/Director.css";
@@ -25,6 +26,7 @@ function DirectorComponent(props) {
       return (
         <Link
           key={i}
+          onClick={() => props.changePage(1, false)}
           className='movie--title'
           to={{ pathname: `/movie/${movie.id_movie}` }}>
           {movie.title}
@@ -32,6 +34,15 @@ function DirectorComponent(props) {
       );
     });
   };
+
+  var date = new Date();
+  var year = date.getFullYear();
+
+  let directorBirthday = director && director.date_of_birth;
+  let birthYear = directorBirthday && directorBirthday.substring(0, 4);
+  let birthYearInt = parseInt(birthYear);
+
+  let age = year - birthYearInt;
 
   return (
     <div>
@@ -49,7 +60,7 @@ function DirectorComponent(props) {
               <span>
                 {director.firstname} {director.name}
               </span>
-              <span>Age : </span>
+              <span>Age : {age} ans</span>
               <span>Nationnalité : {director.nationality} </span>
               <span>Liste des films réalisés :</span>
             </div>
@@ -68,6 +79,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  changePage: (aInt) => dispatch(changePage(aInt)),
   getDirectorWithId: (directorId) => dispatch(getDirectorWithId(directorId)),
 });
 
@@ -77,3 +89,8 @@ const Director = connect(
 )(DirectorComponent);
 
 export { Director };
+
+// const a = Date.parse(date);
+// const b = Date.parse(directorBirthday);
+// const c = b - a;
+// console.log("sous", convertDateToInput(c));

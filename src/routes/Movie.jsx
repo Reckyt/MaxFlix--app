@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Loading, IconButton } from "../composant";
 
 import { getMovieWithId } from "../action/moviesAction";
+import { changePage } from "../action/routingAction";
 
 import {
   addWantedMovie,
@@ -149,13 +150,13 @@ function MovieComponent(props) {
                 Réalisateur : {movie.firstname} {movie.name}
                 <Link
                   className='director--name'
-                  to={{ pathname: `/director/${movie.id_director}` }}>
+                  to={{ pathname: `/director/${movie.id_director}` }}
+                  onClick={() => props.changePage(2)}>
                   <p className='infoClic'>Voir la fiche du réalisateur</p>
                 </Link>
               </span>
               <span>Sortie en : {movie.year} </span>
               <span>Genre : {movie.kind}</span>
-              <span>Acteurs principaux :</span>
               <span>Synopsis :</span>
               <p className='synopsis'>{movie.synopsis}</p>
             </div>
@@ -191,6 +192,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  changePage: (aInt) => dispatch(changePage(aInt)),
   getMovieWithId: (movieId) => dispatch(getMovieWithId(movieId)),
   addWantedMovie: (idMovie, idUser) =>
     dispatch(addWantedMovie(idMovie, idUser)),

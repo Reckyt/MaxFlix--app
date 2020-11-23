@@ -10,7 +10,7 @@ function NoResult() {
         color: "white",
       }}>
       <h1>
-        Votre recherche ne fait pas parite des films ou réalisateurs enregistrés
+        Votre recherche ne fait pas partie des films ou réalisateurs enregistrés
         sur ce site ! Désolé
       </h1>
     </div>

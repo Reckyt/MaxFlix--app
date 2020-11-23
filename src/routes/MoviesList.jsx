@@ -20,6 +20,12 @@ function MoviesListComponent(props) {
   const [kind, setKind] = useState("");
   let wanted;
   let seen;
+  let decadeArray = [];
+
+  let decadeSelected = Number(decade);
+  for (let i = decadeSelected; i < decadeSelected + 10; i++) {
+    decadeArray.push(i);
+  }
 
   const node = useRef();
   useOnClickOutside(node, () => setOpen(false));
@@ -43,24 +49,36 @@ function MoviesListComponent(props) {
             .includes(props.research.trim().toLowerCase())
         );
       } else if (decade) {
-        for (let i = Number(decade); i < Number(decade) + 10; i++) {
-          console.log(i);
-          return movie.year === i;
-        }
       } else if (kind) {
         return movie.kind.toLowerCase().includes(kind.toLowerCase());
       } else if (decade && kind) {
-        let i = Number(decade);
-        for (i; i <= i + 10; i++) {
-          return (
-            movie.kind.toLowerCase().includes(kind.toLowerCase()) &&
-            movie.year === i
-          );
-        }
+        // let decadeSelected = Number(decade);
+        // for (let i = decadeSelected; i < decadeSelected + 10; i++) {
+        //   return (
+        //     movie.kind.toLowerCase().includes(kind.toLowerCase()) &&
+        //     movie.year === i
+        //   );
+        // }
       } else {
         return movie;
       }
     });
+
+  if (decade) {
+    let decadeMovies = decadeArray.map((year, i) => {
+      return (
+        props.movies &&
+        props.movies.filter((movie) => {
+          return movie.year === year;
+        })
+      );
+    });
+    decadeMovies.map((movie) => {
+      return movie.map((mov) => {
+        return filteredMoviesList.push(mov);
+      });
+    });
+  }
 
   const renderList = (filteredMoviesList) => {
     if (filteredMoviesList.length === 0) {

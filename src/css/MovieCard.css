@@ -20,6 +20,10 @@
 .movieCard--img {
   position: relative;
 }
+.movieCard--img:hover {
+  transform: scale(1.05);
+  transition: all 0.5s ease-in-out;
+}
 
 .movieCard--poster {
   width: 300px;
