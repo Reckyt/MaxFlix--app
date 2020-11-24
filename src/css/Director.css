@@ -7,11 +7,6 @@
   justify-content: space-around;
 }
 
-.imgDirector {
-  width: 30%;
-  margin-left: 100px;
-}
-
 .imgDirector--img {
   width: 500px;
   height: 43rem;
@@ -66,4 +61,43 @@
 
 .movie--title:hover {
   text-decoration: underline;
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 1000px) {
+  .imgDirector--img {
+    width: 350px;
+    height: 30rem;
+  }
+  .container--directorInfo {
+    width: 50%;
+    height: 29.5rem;
+  }
+  .directorInfo span {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container--director {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .imgDirector--img {
+    width: 250px;
+    height: 25rem;
+    margin-bottom: 30px;
+  }
+
+  .container--directorInfo {
+    width: 90%;
+    height: 600px;
+    align-items: center;
+  }
+  .directorInfo span {
+    font-size: 1.5rem;
+  }
 }

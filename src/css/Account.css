@@ -75,3 +75,54 @@
   background-color: black;
   cursor: pointer;
 }
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 1200px) {
+  .account {
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+  .icon--tag,
+  .icon--eye {
+    width: 30px;
+  }
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 800px) {
+  .account {
+    font-size: 15px;
+  }
+  .account--bloc {
+    height: 6rem;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+  .icon--tag,
+  .icon--eye {
+    width: 20px;
+  }
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 400px) {
+  .account {
+    font-size: 10px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+  .icon--tag,
+  .icon--eye {
+    width: 20px;
+  }
+}

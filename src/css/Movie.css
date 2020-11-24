@@ -7,11 +7,6 @@
   justify-content: space-around;
 }
 
-.posterMovie {
-  width: 30%;
-  margin-left: 100px;
-}
-
 .posterMovie--img {
   width: 500px;
   height: 43rem;
@@ -48,7 +43,7 @@
 
 .infoClic {
   color: grey;
-  font-size: 15px;
+  font-size: 1vw;
   margin-left: 14rem;
   display: inline;
 }
@@ -57,8 +52,9 @@
 }
 
 .synopsis {
-  font-size: 1.8rem;
+  font-size: 1.7vw;
   color: #959595;
+  text-align: justify;
 }
 
 .container--buttonWatch {
@@ -92,4 +88,81 @@
 .play {
   width: 65px;
   height: 65px;
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 1600px) {
+  .infoClic {
+    margin-left: 4rem;
+  }
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 1200px) {
+  .movieInfo span {
+    font-size: 1.5rem;
+  }
+}
+
+/* ------------ MEDIA QUERIES ------------ */
+
+@media screen and (max-width: 1000px) {
+  .posterMovie--img {
+    width: 350px;
+    height: 30rem;
+  }
+  .container--movieInfo {
+    width: 50%;
+    height: 28.5rem;
+  }
+  .movieInfo span {
+    font-size: 1rem;
+  }
+  .infoClic {
+    margin-left: 5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container--movie {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .posterMovie--img {
+    width: 250px;
+    height: 25rem;
+    margin-bottom: 30px;
+  }
+
+  .container--movieInfo {
+    width: 90%;
+    height: 500px;
+    align-items: center;
+  }
+
+  .synopsis {
+    font-size: 20px;
+  }
+  .infoClic {
+    font-size: 1rem;
+    margin-left: 10rem;
+  }
+
+  .container--buttonWatch {
+    width: 130px;
+  }
+
+  .buttonWatch {
+    font-size: 20px;
+  }
+  .play {
+    width: 35px;
+  }
+  .icons {
+    position: absolute;
+    top: 60%;
+  }
 }
