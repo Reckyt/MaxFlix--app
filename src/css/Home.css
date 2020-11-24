@@ -12,7 +12,7 @@
 }
 
 .carousel--link {
-  width: 380px;
+  width: 350px;
   height: 532px;
   margin: 10px;
   margin-bottom: 50px;
@@ -33,4 +33,55 @@
   align-items: center;
   justify-content: center;
   background-color: #000000aa;
+}
+
+/* ------------------------- MEDIA QUERIES ---------------------- */
+
+@media screen and (max-width: 1600px) {
+  .carousel--link {
+    width: 300px;
+    height: 450px;
+    margin: 10px;
+    margin-bottom: 50px;
+    background-size: cover;
+    cursor: pointer;
+  }
+}
+
+/* ------------------------- MEDIA QUERIES ---------------------- */
+
+@media screen and (max-width: 1300px) {
+  .carousel--link {
+    width: 250px;
+    height: 350px;
+    margin: 10px;
+    margin-bottom: 50px;
+    background-size: cover;
+    cursor: pointer;
+  }
+}
+
+/* ------------------------- MEDIA QUERIES ---------------------- */
+
+@media screen and (max-width: 900px) {
+  .carousel--link {
+    width: 250px;
+    height: 350px;
+    margin: 10px;
+    margin-bottom: 50px;
+    background-size: cover;
+    cursor: pointer;
+  }
+  .home h2 {
+    font-size: 3rem;
+  }
+}
+
+/* ------------------------- MEDIA QUERIES ---------------------- */
+
+@media screen and (max-width: 400px) {
+  .carousel--link {
+    width: 150px;
+    height: 210px;
+  }
 }

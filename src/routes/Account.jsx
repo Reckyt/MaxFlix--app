@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -12,7 +12,14 @@ import "../css/Account.css";
 
 function AccountComponent(props) {
   const isLogged = localStorage.getItem("cool-jwt");
+  const userId = props.match.params.id;
   const name = props.user && props.user.firstname;
+
+  const propsGetUserWithId = props.getUserWithId;
+
+  useEffect(() => {
+    propsGetUserWithId(userId);
+  }, [propsGetUserWithId, userId]);
 
   const handleDeconnect = (dispatch) => {
     localStorage.removeItem("cool-jwt");

@@ -20,14 +20,18 @@
 .movieCard--img {
   position: relative;
 }
+
 .movieCard--img:hover {
   transform: scale(1.05);
   transition: all 0.5s ease-in-out;
 }
 
 .movieCard--poster {
+  /* width: 16.5vw;
+  height: 50vh; */
   width: 300px;
   height: 440px;
+  position: relative;
 }
 
 .movieCard--icon {
@@ -42,7 +46,9 @@
 }
 
 .movieCard--info {
-  width: 80%;
+  width: 300px;
+  height: 100px;
+  position: relative;
   padding: 5px;
   font-size: 1rem;
   margin-top: 20px;
@@ -54,4 +60,20 @@
 
 .movieCard--info span {
   margin-top: 10px;
+  text-align-last: center;
+}
+
+/* ------------------------- MEDIA QUERIES ---------------------- */
+
+@media screen and (max-width: 400px) {
+  .container--link {
+    width: 100%;
+  }
+  .movieCard--poster {
+    width: 200px;
+    height: 350px;
+  }
+  .movieCard--info {
+    width: 200px;
+  }
 }

@@ -1,0 +1,62 @@
+.menu--burger--hide {
+  display: none;
+}
+
+.menu--burger--responsive {
+  width: 30%;
+  height: 10%;
+  color: white;
+  border-radius: 5px;
+  background-color: #464455;
+  position: absolute;
+  top: 65px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.menu--burger--responsive a {
+  width: 90%;
+  height: 40%;
+  color: #959595;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .menu--burger--responsive div {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.menu--burger--responsive a:hover {
+  background-color: rgba(255, 255, 255, 0.301);
+  border-radius: 5px;
+}
+
+.selected {
+  background-color: rgba(255, 255, 255, 0.301);
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 900px) {
+  .menu--burger--responsive {
+    height: 10%;
+  }
+  .menu--burger--responsive a {
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .menu--burger--responsive a {
+    font-size: 20px;
+  }
+}

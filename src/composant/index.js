@@ -5,5 +5,7 @@ export * from "./PlayerComponent";
 export * from "./Loading";
 export * from "./NoResult";
 export * from "./Burger";
+export * from "./BurgerHome";
 export * from "./Menu";
+export * from "./MenuHome";
 export * from "./IconButton";

@@ -22,14 +22,13 @@
 }
 
 .movies--list {
-  width: 100%;
+  width: 50%;
   height: 100vh;
   color: white;
 }
 
 .movies--list li {
-  margin: 10px;
-  margin-left: 25%;
+  margin-top: 20px;
   text-align: start;
   color: white;
 }
