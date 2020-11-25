@@ -21,6 +21,7 @@
 .menu--burger span {
   font-size: 18px;
 }
+
 .sorting--menu {
   width: 100%;
   position: relative;
@@ -56,4 +57,28 @@
 
 .sorting--menu select:hover {
   border-bottom: 2px solid #bd1521;
+}
+
+@media screen and (max-width: 1400px) {
+  .sorting--menu {
+    flex-direction: column;
+  }
+  .sorting--label {
+    width: 100%;
+  }
+  .sorting--menu select {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .menu--burger span {
+    font-size: 15px;
+  }
+  .sorting--label {
+    font-size: 15px;
+  }
+  .sorting--menu select {
+    font-size: 15px;
+  }
 }
