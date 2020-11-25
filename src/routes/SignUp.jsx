@@ -22,9 +22,9 @@ function SignUpComponent(props) {
   const submit = (event) => {
     event.preventDefault();
     props.addUser(newUser);
-    if (props.newUser) {
-      props.history.push(`/signin`);
-    }
+    // if (props.newUser) {
+    props.history.push(`/signin`);
+    // }
   };
 
   return (
