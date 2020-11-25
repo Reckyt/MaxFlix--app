@@ -45,7 +45,7 @@ function HeaderHomeComponent(props) {
     <div className='container--header'>
       <div className='headerHome'>
         <div className='home--responsive'>
-          <Link to='/'>
+          <Link to='/' className='reponsive--link'>
             <div
               className='websiteName--responsive'
               onClick={() => handleMenu(0, false)}>

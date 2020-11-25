@@ -58,6 +58,11 @@
   color: white;
   font-size: 40px;
   margin-top: 10px;
+  text-decoration: none;
+}
+
+.reponsive--link {
+  text-decoration: none;
 }
 
 .headerHome--searchBar {
@@ -159,7 +164,7 @@
     display: none;
   }
   .headerHome--searchBar {
-    width: 200px;
+    width: 500px;
   }
   .home--responsive {
     display: block;
@@ -178,11 +183,14 @@
 
 /* ------------------------- MEDIA QUERIES ---------------------- */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .websiteName {
     font-size: 40px;
   }
   .headerHome {
     width: 100%;
+  }
+  .headerHome--searchBar {
+    width: 200px;
   }
 }

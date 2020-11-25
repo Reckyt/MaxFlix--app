@@ -108,13 +108,13 @@
 
 /* ------------ MEDIA QUERIES ------------ */
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .posterMovie--img {
     width: 350px;
     height: 30rem;
   }
   .container--movieInfo {
-    width: 50%;
+    width: 45%;
     height: 28.5rem;
   }
   .movieInfo span {
