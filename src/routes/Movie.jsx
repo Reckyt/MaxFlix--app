@@ -169,7 +169,7 @@ function MovieComponent(props) {
                   </div>
                 )}
                 <Link
-                  to={{ pathname: `/player` }}
+                  to={{ pathname: `/player/${movie.id_movie}/${movie.title}` }}
                   className='container--buttonWatch'>
                   <div className='buttonWatch'>REGARDER</div>
                   <img src={play} alt='play' className='play' />

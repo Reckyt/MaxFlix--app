@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPlayer from "react-player";
 
-function PlayerComponent() {
+function PlayerComponent(props) {
   const style = {
     position: "relative",
     width: "100%",
@@ -12,10 +12,12 @@ function PlayerComponent() {
     alignItems: "center",
   };
 
+  const titleMovie = props.movie && props.movie.title;
+
   return (
     <div style={style}>
       <ReactPlayer
-        url='https://www.dropbox.com/s/mik5i6iy8tqgs41/contenu%20bloqu%C3%A9.mp4?dl=0'
+        url={`http://localhost:3000/api/video/${props.movieId}/${titleMovie}`}
         controls
         playing={false}
         width='100%'
@@ -29,5 +31,3 @@ function PlayerComponent() {
 }
 
 export { PlayerComponent };
-
-// http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4

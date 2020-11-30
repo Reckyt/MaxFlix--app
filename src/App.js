@@ -87,7 +87,7 @@ function App(props) {
           />
           <Route path='/movie/:id' component={Movie} />
           <Route path='/director/:id' component={Director} />
-          <Route path='/Player' component={Player} />
+          <Route path='/Player/:id/:title' component={Player} />
 
           <Route path='/signUp' component={SignUp} />
           <Route path='/signIn' component={SignIn} />
