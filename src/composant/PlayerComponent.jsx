@@ -19,7 +19,7 @@ function PlayerComponent(props) {
       <ReactPlayer
         url={
           props.canWatch
-            ? `http://localhost:3000/api/video/${props.movieId}/${titleMovie}`
+            ? `http://192.168.1.78:3000/api/video/${props.movieId}/${titleMovie}`
             : "https://www.dropbox.com/s/mik5i6iy8tqgs41/contenu%20bloqu%C3%A9.mp4?dl=0"
         }
         controls
