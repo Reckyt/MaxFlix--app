@@ -17,19 +17,16 @@ function PlayerComponent(props) {
   return (
     <div style={style}>
       <ReactPlayer
-        url={`http://localhost:3000/api/video/${props.movieId}/${titleMovie}`}
+        url={
+          props.canWatch
+            ? `http://localhost:3000/api/video/${props.movieId}/${titleMovie}`
+            : "https://www.dropbox.com/s/mik5i6iy8tqgs41/contenu%20bloqu%C3%A9.mp4?dl=0"
+        }
         controls
         playing={false}
         width='100%'
         height='100%'
-        style={{ position: "absolute", top: "0", left: "0" }}
-        // light={this.props.imageUrl}
-        // onEnded={this.props.handleEnded}
-        config={{
-          youtube: {
-            file: { tracks: [{ kind: "" }] },
-          },
-        }}
+        style={{ position: "absolute", top: "0", left: "0", outline: "none" }}
       />
     </div>
   );

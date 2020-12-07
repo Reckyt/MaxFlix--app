@@ -13,6 +13,7 @@ function SignUpComponent(props) {
     mail: "",
     password: "",
     admin: false,
+    canWatch: false,
   });
 
   const handleChange = (event) => {
