@@ -12,7 +12,7 @@ function PlayerComponent(props) {
     alignItems: "center",
   };
 
-  const titleMovie = props.movie && props.movie.title;
+  const titleMovie = props.movie && props.movie.title.toLowerCase();
 
   return (
     <div style={style}>
@@ -25,6 +25,11 @@ function PlayerComponent(props) {
         style={{ position: "absolute", top: "0", left: "0" }}
         // light={this.props.imageUrl}
         // onEnded={this.props.handleEnded}
+        config={{
+          youtube: {
+            file: { tracks: [{ kind: "" }] },
+          },
+        }}
       />
     </div>
   );
